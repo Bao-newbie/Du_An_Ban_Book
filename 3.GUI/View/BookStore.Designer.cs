@@ -58,6 +58,7 @@
             label9 = new Label();
             rBtnConHang = new RadioButton();
             rBtnHetHang = new RadioButton();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dtgProduct).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcb_IMG).BeginInit();
             SuspendLayout();
@@ -333,6 +334,7 @@
             btnDelete.TabIndex = 87;
             btnDelete.Text = "Xóa";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // txbTimSach
             // 
@@ -394,12 +396,21 @@
             rBtnHetHang.Text = "Hết Hàng";
             rBtnHetHang.UseVisualStyleBackColor = false;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(249, 16);
+            label1.Name = "label1";
+            label1.Size = new Size(0, 20);
+            label1.TabIndex = 95;
+            // 
             // BookStore
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(60, 63, 81);
             ClientSize = new Size(1238, 651);
+            Controls.Add(label1);
             Controls.Add(rBtnHetHang);
             Controls.Add(rBtnConHang);
             Controls.Add(tbxMoTa);
@@ -470,5 +481,6 @@
         private RadioButton rBtnHetHang;
         private DataGridViewImageColumn anh;
         private DataGridViewImageColumn anhsp;
+        private Label label1;
     }
 }
