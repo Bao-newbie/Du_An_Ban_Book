@@ -334,6 +334,7 @@
             btnDelete.TabIndex = 87;
             btnDelete.Text = "Xóa";
             btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
             // 
             // txbTimSach
             // 

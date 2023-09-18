@@ -26,7 +26,7 @@ namespace _3.GUI.View
         SanPham _ctsp;
         Guid id;
 
-        private string AnhURL = "";
+        private Image AnhURL ;
         private string imgLocation;
         private string selectedImagePath;
         public BookStore()
@@ -253,19 +253,40 @@ namespace _3.GUI.View
                 {
                     sp.TrangThai = 1;
                 }
-                //sp.Anh = imgLocation;
                 sp.idTacGia = iTacGia.GetAll().Where(c => c.Ten == cbbTacGia.Text).Select(c => c.idtacGia).FirstOrDefault();
                 sp.idHinhThucBia = iHinhThucBia.GetAll().Where(c => c.LoaiBia == cbbBia.Text).Select(c => c.idBia).FirstOrDefault();
                 sp.idNhaCungCap = iNhaCungCap.GetAll().Where(c => c.TenNCC == cbbNCC.Text).Select(c => c.idNhaCC).FirstOrDefault();
                 sp.idNXB = iNXB.GetAll().Where(c => c.TenNXB == cbbNXB.Text).Select(c => c.idNXB).FirstOrDefault();
                 sp.idTheLoai = iITheLoai.GetAll().Where(c => c.TenTheLoai == cbbTL.Text).Select(c => c.idTheLoai).FirstOrDefault();
 
+                // Kiểm tra xem người dùng đã chọn một hình ảnh mới chưa
+                if (!string.IsNullOrEmpty(imgLocation))
+                {
+                    sp.Anh = imgLocation; // Cập nhật đường dẫn hình ảnh
+                }
+
                 iSanPham.Update(sp);
-                MessageBox.Show("sửa thành công");
+                MessageBox.Show("Sửa thành công");
                 LoadDataProduct();
                 ClearForm();
+            }
+        }
 
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var sp = iSanPham.GetAll().FirstOrDefault(x => x.IDsanPham == id);
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn xóa không?", "Thông Báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                iSanPham.Delete(sp);
+                MessageBox.Show("Xoa thanh cong");
+                LoadDataProduct();
+                ClearForm();
+            }
+            if (dialogResult == DialogResult.No)
+            {
+                MessageBox.Show("Xóa không thành công");
             }
         }
         //int checkIndex=-1;
