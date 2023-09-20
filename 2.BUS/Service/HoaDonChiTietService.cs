@@ -40,17 +40,49 @@ namespace _2.BUS.Service
 
         public bool Delete(HoaDonChiTietvIEW obj)
         {
-            throw new NotImplementedException();
+
+            if (obj == null) return false;
+            var ncc = iHDCT.GetAll().FirstOrDefault(c => c.IDHoaDonChiTiet == obj.idHoaDonCT);
+            if (iHDCT.Delete(ncc)) return true;
+            return false;
         }
 
         public List<HoaDonChiTietvIEW> GetAll()
         {
-            throw new NotImplementedException();
+            List<HoaDonChiTietvIEW> lst = new List<HoaDonChiTietvIEW> ();
+            lst = (from a in iHDCT.GetAll()
+                   join b in iHD.GetAll() on a.idHoaDon equals b.IDHoaDon
+                   join c in iSP.GetAll() on a.idSanPham equals c.IDsanPham
+                   select new HoaDonChiTietvIEW()
+                   {
+                       idHoaDonCT = a.IDHoaDonChiTiet,
+                       IdHoaDon = b.IDHoaDon,     
+                       idSanPham = c.IDsanPham,
+                       MaHDCt = a.MaHDCT,
+                       soLuong =a.SoLuong,
+                       tongTien = a.TongTien,
+
+                       tenSach = c.TenSach,
+                       giaBan = c.GiaBan,
+                       soLuongTon = c.SoLuongTon,
+
+                   }
+                   ).ToList ();
+            return lst;
         }
 
         public bool Update(HoaDonChiTietvIEW obj)
         {
-            throw new NotImplementedException();
+
+            if (obj == null) return false;
+            var ncc = iHDCT.GetAll().FirstOrDefault(c => c.IDHoaDonChiTiet == obj.idHoaDonCT);
+            ncc.MaHDCT = obj.MaHDCt;
+            ncc.idHoaDon = obj.IdHoaDon;
+            ncc.idSanPham = obj.idSanPham;
+            ncc.SoLuong = obj.soLuong;
+            ncc.TongTien = obj.tongTien;
+            if (iHDCT.Update(ncc)) return true;
+            return false;
         }
     }
 }

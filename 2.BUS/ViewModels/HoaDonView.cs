@@ -12,9 +12,13 @@ namespace _2.BUS.ViewModels
         public KhachHang khachHang { get; set; }
         public Guid iDhoaDon { get; set; }
         public string MaHD { get; set; }
-        public Guid iDnhanVien { get; set; }
+        //public Guid iDnhanVien { get; set; }
         public Guid iDkhachHang { get; set; }
         public DateTime ngayThanhToan { get; set; }
+        public int trangThai { get; set; }
+
+        public string maKH { get; set; }
+        public string tenKH { get; set; }
 
     }
 }

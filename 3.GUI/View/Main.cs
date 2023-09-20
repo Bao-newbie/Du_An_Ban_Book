@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using _3.GUI;
 
 namespace _3.GUI.View
 {
@@ -86,7 +87,7 @@ namespace _3.GUI.View
 
         private void btnBill_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender);
+            OpenchildForm(new BillInFor(), sender);
         }
 
         private void btnCustom_Click(object sender, EventArgs e)

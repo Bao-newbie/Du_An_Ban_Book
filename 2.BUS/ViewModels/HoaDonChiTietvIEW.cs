@@ -17,5 +17,9 @@ namespace _2.BUS.ViewModels
         public Guid IdHoaDon { get; set; }
         public int soLuong { get; set; }
         public double tongTien { get; set; }
+
+        public string tenSach { get; set; }
+        public double giaBan { get; set; }
+        public int soLuongTon { get; set; }
     }
 }
