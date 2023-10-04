@@ -2,8 +2,10 @@
 using _1.DAL.IRepositories;
 using _1.DAL.SachDbContext;
 using Du_An_Ban_Sach._1.DAL.Models;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +45,17 @@ namespace _1.DAL.Repositories
         public List<SanPham> GetAll()
         {
             return context.sanPhams.ToList();
+        }
+
+        public double GetUnitPrice(string name)
+        {
+            List<SanPham> sanPhamList = new List<SanPham>();
+            var sanPham = sanPhamList.FirstOrDefault(sp => sp.TenSach == name);
+            if (sanPham != null)
+            {
+                return sanPham.GiaBan;
+            }
+            return 0;
         }
 
         public bool Update(SanPham sanPham)

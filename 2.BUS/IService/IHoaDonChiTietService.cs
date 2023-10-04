@@ -12,6 +12,7 @@ namespace _2.BUS.IService
         bool Add(HoaDonChiTietvIEW obj);
         bool Delete(HoaDonChiTietvIEW obj);
         bool Update(HoaDonChiTietvIEW obj);
+       
         List<HoaDonChiTietvIEW> GetAll();
     }
 }

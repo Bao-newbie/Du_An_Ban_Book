@@ -12,7 +12,7 @@ namespace _1.DAL.IRepositories
         bool Add(SanPham sanPham);
         bool Update(SanPham sanPham);
         bool Delete(SanPham sanPham);
-
+        double GetUnitPrice(string name);
         List<SanPham> GetAll();
     }
 }

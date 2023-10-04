@@ -30,7 +30,6 @@
         {
             dtgProduct = new DataGridView();
             tbxTenNV = new TextBox();
-            tbxTenKH = new ComboBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -40,7 +39,6 @@
             label5 = new Label();
             tbxSoLuong = new TextBox();
             label6 = new Label();
-            dtpDay = new DateTimePicker();
             label7 = new Label();
             tbxTien = new TextBox();
             btnThanhToan = new Button();
@@ -48,6 +46,10 @@
             btnUpdate = new Button();
             btnDelete = new Button();
             btnLoadForm = new Button();
+            tbxTime = new TextBox();
+            label8 = new Label();
+            lbTenKH = new Label();
+            txtSDT = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dtgProduct).BeginInit();
             SuspendLayout();
             // 
@@ -75,15 +77,6 @@
             tbxTenNV.Size = new Size(319, 36);
             tbxTenNV.TabIndex = 67;
             // 
-            // tbxTenKH
-            // 
-            tbxTenKH.FormattingEnabled = true;
-            tbxTenKH.Location = new Point(14, 131);
-            tbxTenKH.Name = "tbxTenKH";
-            tbxTenKH.RightToLeft = RightToLeft.No;
-            tbxTenKH.Size = new Size(319, 28);
-            tbxTenKH.TabIndex = 64;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -100,38 +93,39 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(14, 100);
+            label2.Location = new Point(12, 94);
             label2.Name = "label2";
-            label2.Size = new Size(156, 28);
+            label2.Size = new Size(133, 28);
             label2.TabIndex = 69;
-            label2.Text = "Tên khách hàng";
+            label2.Text = "Số điện thoại";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(473, 9);
+            label3.Location = new Point(437, 9);
             label3.Name = "label3";
-            label3.Size = new Size(103, 28);
+            label3.Size = new Size(186, 28);
             label3.TabIndex = 71;
-            label3.Text = "Sản phẩm";
+            label3.Text = "Tồn kho | Tên Sách";
             // 
             // cbbSP
             // 
             cbbSP.FormattingEnabled = true;
-            cbbSP.Location = new Point(473, 48);
+            cbbSP.Location = new Point(437, 41);
             cbbSP.Name = "cbbSP";
             cbbSP.RightToLeft = RightToLeft.No;
             cbbSP.Size = new Size(420, 28);
             cbbSP.TabIndex = 70;
+            cbbSP.SelectedIndexChanged += cbbSP_SelectedIndexChanged_1;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(473, 100);
+            label4.Location = new Point(437, 94);
             label4.Name = "label4";
             label4.Size = new Size(83, 28);
             label4.TabIndex = 73;
@@ -142,7 +136,7 @@
             tbxGia.Cursor = Cursors.IBeam;
             tbxGia.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxGia.ForeColor = Color.Black;
-            tbxGia.Location = new Point(473, 132);
+            tbxGia.Location = new Point(437, 126);
             tbxGia.Margin = new Padding(5);
             tbxGia.Multiline = true;
             tbxGia.Name = "tbxGia";
@@ -154,7 +148,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(702, 100);
+            label5.Location = new Point(666, 93);
             label5.Name = "label5";
             label5.Size = new Size(94, 28);
             label5.TabIndex = 75;
@@ -165,7 +159,7 @@
             tbxSoLuong.Cursor = Cursors.IBeam;
             tbxSoLuong.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxSoLuong.ForeColor = Color.Black;
-            tbxSoLuong.Location = new Point(702, 132);
+            tbxSoLuong.Location = new Point(666, 126);
             tbxSoLuong.Margin = new Padding(5);
             tbxSoLuong.Multiline = true;
             tbxSoLuong.Name = "tbxSoLuong";
@@ -177,25 +171,18 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(14, 194);
+            label6.Location = new Point(14, 218);
             label6.Name = "label6";
             label6.Size = new Size(193, 28);
             label6.TabIndex = 77;
             label6.Text = "Ngày : Tháng : Năm";
-            // 
-            // dtpDay
-            // 
-            dtpDay.Location = new Point(14, 239);
-            dtpDay.Name = "dtpDay";
-            dtpDay.Size = new Size(320, 27);
-            dtpDay.TabIndex = 78;
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(473, 198);
+            label7.Location = new Point(437, 192);
             label7.Name = "label7";
             label7.Size = new Size(110, 28);
             label7.TabIndex = 80;
@@ -206,7 +193,7 @@
             tbxTien.Cursor = Cursors.IBeam;
             tbxTien.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxTien.ForeColor = Color.Black;
-            tbxTien.Location = new Point(473, 230);
+            tbxTien.Location = new Point(437, 224);
             tbxTien.Margin = new Padding(5);
             tbxTien.Multiline = true;
             tbxTien.Name = "tbxTien";
@@ -216,7 +203,7 @@
             // btnThanhToan
             // 
             btnThanhToan.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnThanhToan.Location = new Point(702, 224);
+            btnThanhToan.Location = new Point(666, 218);
             btnThanhToan.Name = "btnThanhToan";
             btnThanhToan.Size = new Size(191, 46);
             btnThanhToan.TabIndex = 81;
@@ -232,6 +219,7 @@
             btnAdd.TabIndex = 82;
             btnAdd.Text = "Thêm";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnUpdate
             // 
@@ -263,12 +251,57 @@
             btnLoadForm.Text = "Làm Mới";
             btnLoadForm.UseVisualStyleBackColor = true;
             // 
+            // tbxTime
+            // 
+            tbxTime.Location = new Point(14, 249);
+            tbxTime.Name = "tbxTime";
+            tbxTime.Size = new Size(319, 27);
+            tbxTime.TabIndex = 86;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.ForeColor = Color.White;
+            label8.Location = new Point(12, 168);
+            label8.Name = "label8";
+            label8.Size = new Size(167, 28);
+            label8.TabIndex = 87;
+            label8.Text = "Tên khách hàng :";
+            // 
+            // lbTenKH
+            // 
+            lbTenKH.AutoSize = true;
+            lbTenKH.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lbTenKH.ForeColor = Color.White;
+            lbTenKH.Location = new Point(180, 168);
+            lbTenKH.Name = "lbTenKH";
+            lbTenKH.Size = new Size(27, 28);
+            lbTenKH.TabIndex = 89;
+            lbTenKH.Text = "...";
+            // 
+            // txtSDT
+            // 
+            txtSDT.Cursor = Cursors.IBeam;
+            txtSDT.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtSDT.ForeColor = Color.Black;
+            txtSDT.Location = new Point(14, 127);
+            txtSDT.Margin = new Padding(5);
+            txtSDT.Multiline = true;
+            txtSDT.Name = "txtSDT";
+            txtSDT.Size = new Size(319, 36);
+            txtSDT.TabIndex = 90;
+            // 
             // BillInFor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(60, 63, 81);
             ClientSize = new Size(1238, 651);
+            Controls.Add(txtSDT);
+            Controls.Add(lbTenKH);
+            Controls.Add(label8);
+            Controls.Add(tbxTime);
             Controls.Add(btnLoadForm);
             Controls.Add(btnDelete);
             Controls.Add(btnUpdate);
@@ -276,7 +309,6 @@
             Controls.Add(btnThanhToan);
             Controls.Add(label7);
             Controls.Add(tbxTien);
-            Controls.Add(dtpDay);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(tbxSoLuong);
@@ -287,7 +319,6 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(tbxTenNV);
-            Controls.Add(tbxTenKH);
             Controls.Add(dtgProduct);
             Name = "BillInFor";
             Text = "BillInFor";
@@ -300,7 +331,6 @@
 
         private DataGridView dtgProduct;
         private TextBox tbxTenNV;
-        private ComboBox tbxTenKH;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -310,7 +340,6 @@
         private Label label5;
         private TextBox tbxSoLuong;
         private Label label6;
-        private DateTimePicker dtpDay;
         private Label label7;
         private TextBox tbxTien;
         private Button btnThanhToan;
@@ -318,5 +347,9 @@
         private Button btnUpdate;
         private Button btnDelete;
         private Button btnLoadForm;
+        private TextBox tbxTime;
+        private Label label8;
+        private Label lbTenKH;
+        private TextBox txtSDT;
     }
 }

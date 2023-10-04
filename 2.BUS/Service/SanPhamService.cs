@@ -131,5 +131,9 @@ namespace _2.BUS.Service
             return false;
 
         }
+        public double GetPrice(string tenSp)
+        {
+           return SanPhamRP.GetUnitPrice(tenSp);
+        }
     }
 }

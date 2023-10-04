@@ -12,6 +12,7 @@ namespace _2.BUS.IService
         bool Add(SanPhamView obj);
         bool Delete(SanPhamView obj);
         bool Update(SanPhamView obj);
+        double GetPrice(string tenSp);
         string? GetByName(string? name);
         List<SanPhamView> GetAll();
     }

@@ -45,6 +45,7 @@ namespace _1.DAL.Repositories
             return context.hoaDonChiTiets.ToList();
         }
 
+            
         public bool Update(HoaDonChiTiet hoaDonChiTiet)
         {
             if (hoaDonChiTiet == null)

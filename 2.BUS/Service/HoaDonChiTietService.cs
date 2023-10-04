@@ -71,6 +71,12 @@ namespace _2.BUS.Service
             return lst;
         }
 
+
+
+
+
+       
+
         public bool Update(HoaDonChiTietvIEW obj)
         {
 
