@@ -25,16 +25,15 @@ namespace _3.GUI
 
         public BillInFor()
         {
+            InitializeComponent();
             hoaDonChiTietService = new HoaDonChiTietService();
             khachHangService = new KhachHangService();
             sanPhamService = new SanPhamService();
             hoaDonService = new HoaDonService();
-            InitializeComponent();
             LoadData();
             LoadCBB();
 
         }
-
         public void LoadData()
         {
             int stt = 1;
@@ -54,7 +53,7 @@ namespace _3.GUI
             dateTime = DateTime.Now;
             tbxTime.Text = dateTime.ToString("dd/MM/yyyy") + " " + dateTime.ToString("HH:mm");
         }
-
+        //ok
         public void LoadCBB()
         {
             foreach (var item in sanPhamService.GetAll())
@@ -65,17 +64,19 @@ namespace _3.GUI
             }
 
         }
+        //ok
         string Ma()
         {
-            string ma = "MS";
+            string ma = "HD";
             Random rand = new Random();
             int a = rand.Next(1000, 9999);
             var so = a.ToString();
             return ma + so;
         }
+        // error idhoadon conflict
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            
+
             DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
@@ -90,14 +91,14 @@ namespace _3.GUI
 
 
                 HoaDonChiTietvIEW hdct = new HoaDonChiTietvIEW();
-                    
-                    hdct.soLuong = Convert.ToInt32(tbxSoLuong.Text);
-                    hdct.tongTien = tong;
-                    hdct.MaHDCt = Ma();
-                    hdct.idSanPham = sanPhamService.GetAll().Where(c => c.TenSach == cbbSP.Text).Select(c=>c.IDsanPham).FirstOrDefault();
-                    //hdct.idSanPham = sanPhamService.GetAll().Where(c => c.GiaBan == Convert.ToDouble(tbxGia.Text)).Select(c => c.IDsanPham).FirstOrDefault();
-                    hdct.IdHoaDon = hoaDonService.GetAll().Where(c => c.ngayThanhToan ==  Convert.ToDateTime(tbxTime.Text)).Select(c=>c.iDhoaDon).FirstOrDefault();
-               
+
+                hdct.soLuong = Convert.ToInt32(tbxSoLuong.Text);
+                hdct.tongTien = tong;
+                hdct.MaHDCt = Ma();
+                hdct.idSanPham = sanPhamService.GetAll().Where(c => c.TenSach == cbbSP.Text).Select(c => c.IDsanPham).FirstOrDefault();
+                //hdct.idSanPham = sanPhamService.GetAll().Where(c => c.GiaBan == Convert.ToDouble(tbxGia.Text)).Select(c => c.IDsanPham).FirstOrDefault();
+                hdct.IdHoaDon = hoaDonService.GetAll().Where(c => c.ngayThanhToan == Convert.ToDateTime(tbxTime.Text)).Select(c => c.iDhoaDon).FirstOrDefault();
+
                 foreach (var x in hoaDonService.GetAll())
                 {
                     HoaDonView hd = new HoaDonView();
@@ -110,16 +111,13 @@ namespace _3.GUI
                 }
                 hoaDonChiTietService.Add(hdct);
                 MessageBox.Show("Them thanh cong");
-
-
             }
             else
             {
                 MessageBox.Show("Them that bai cmnr");
             }
-
         }
-
+        // ok
         public double GetPrice1(string tenSp)
         {
             var lst = sanPhamService.GetAll().FirstOrDefault(c => c.TenSach.Equals(tenSp));
@@ -129,42 +127,37 @@ namespace _3.GUI
             }
             return 0;
         }
-
-
-        private void cbbSP_SelectedIndexChanged_1(object sender, EventArgs e)
+        // error
+        private void cbbSP_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbbSP.SelectedIndex >= 0)
             {
                 double giaSp = GetPrice1(cbbSP.SelectedItem.ToString());
-                tbxGia.Text = giaSp.ToString("C");
+                tbxGia.Text = giaSp.ToString() + "VND";
             }
         }
-
-
+        //ok
         public string GetSDT(string Sdt)
         {
             var lsdt = khachHangService.GetAll().FirstOrDefault(c => c.sdt.Equals(Sdt));
             if (lsdt != null)
             {
                 return lsdt?.Ten;
-            }                      
-            return lbTenKH.Text="...";           
+            }
+            return lbTenKH.Text = "...";
         }
-
-
+        //ok
         private void txtSDT_TextChanged(object sender, EventArgs e)
         {
 
             string phoneNumber = txtSDT.Text;
-            
+
             string name = GetSDT(phoneNumber);
             if (name != null)
             {
                 lbTenKH.Text = name;
             }
-        
-        }
 
-        
+        }
     }
 }
