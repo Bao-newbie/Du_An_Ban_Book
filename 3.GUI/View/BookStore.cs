@@ -59,11 +59,6 @@ namespace _3.GUI.View
             dtgProduct.Columns[10].Name = "Loại bìa";
             dtgProduct.Columns[11].Name = "Mô tả";
             dtgProduct.Columns[12].Name = "Trạng thái";
-            //dtgProduct.Columns[13].Name = "Ảnh";
-            //DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
-            //imageColumn.HeaderText = "Ảnh";
-            //imageColumn.Name = "ImageColumn"; // Đặt tên cho cột, bạn có thể thay đổi tên theo ý muốn
-            //dtgProduct.Columns.Insert(13, imageColumn);
             dtgProduct.Columns[0].Visible = false;
             dtgProduct.Rows.Clear();
             foreach (var x in iSanPham.GetAll())
@@ -102,6 +97,7 @@ namespace _3.GUI.View
             rBtnHetHang.Checked = false;
             tbxMoTa.Text = null;
             pcb_IMG.Image = null;
+            txbTimSach.Text = null;
             //Action<Control.ControlCollection> funct = null;
             //funct = (controls) =>
             //{
@@ -280,7 +276,7 @@ namespace _3.GUI.View
             if (dialogResult == DialogResult.Yes)
             {
                 iSanPham.Delete(sp);
-                MessageBox.Show("Xoa thanh cong");
+                MessageBox.Show("Xóa thành công");
                 LoadDataProduct();
                 ClearForm();
             }
@@ -289,37 +285,47 @@ namespace _3.GUI.View
                 MessageBox.Show("Xóa không thành công");
             }
         }
-        //int checkIndex=-1;
-        ////private void dtgProduct_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        //{
-        //    if (dtgProduct.Columns[e.ColumnIndex] is DataGridViewImageColumn && e.RowIndex >= 0 )
-        //    {
-        //        DataGridViewImageCell cell = dtgProduct.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewImageCell;
+        private void txbTimSach_TextChanged(object sender, EventArgs e)
+        {
+            dtgProduct.ColumnCount = 14;
+            dtgProduct.Columns[0].Name = "ID";
+            dtgProduct.Columns[1].Name = "Mã sách";
+            dtgProduct.Columns[2].Name = "Tên sách";
+            dtgProduct.Columns[3].Name = "Tác giả";
+            dtgProduct.Columns[4].Name = "Số lượng";
+            dtgProduct.Columns[5].Name = "Giá nhập";
+            dtgProduct.Columns[6].Name = "Giá bán";
+            dtgProduct.Columns[7].Name = "Nhà cung cấp";
+            dtgProduct.Columns[8].Name = "Nhà xuất bản";
+            dtgProduct.Columns[9].Name = "Thể loại";
+            dtgProduct.Columns[10].Name = "Loại bìa";
+            dtgProduct.Columns[11].Name = "Mô tả";
+            dtgProduct.Columns[12].Name = "Trạng thái";
+            dtgProduct.Columns[0].Visible = false;
+            dtgProduct.Rows.Clear();
+            foreach (var x in iSanPham.GetAll().Where(c => c.TenSach.ToLower().Contains(txbTimSach.Text)))
+            {
+                dtgProduct.Rows.Add(x.IDsanPham, x.MaSP, x.TenSach, x.TenTG, x.SoLuongTon, x.GiaNhap, x.GiaBan, x.TenNCC, x.TenNXB,
+                    x.TenTheLoai, x.LoaiBia, x.MoTa, x.TrangThai == 0 ? "Còn hàng" : "Hết hàng");
+            }
+            //if (!string.IsNullOrEmpty(selectedImagePath))
+            //{
+            //    // Tạo một hàng mới trong DataGridView
+            //    int rowIndex = dtgProduct.Rows.Add();
 
-        //        // Lấy đường dẫn hoặc dữ liệu nhị phân ảnh từ dữ liệu nguồn (DataSource)
-        //        object? value = e.Value; // Đổi thành cách lấy dữ liệu ảnh của bạn
+            //    // Tạo đối tượng Image từ đường dẫn ảnh
+            //    Image hinhAnh = Image.FromFile(selectedImagePath);
 
-        //        if (value != null)
-        //        {
-        //            if (value is string imagePath) // Đường dẫn tới tập tin ảnh
-        //            {
-        //                if (System.IO.File.Exists(imagePath))
-        //                {
-        //                    // Hiển thị ảnh từ đường dẫn
-        //                    cell.Value = Image.FromFile(imagePath);
-        //                }
-        //            }
-        //            else if (value is byte[] imageData) // Dữ liệu nhị phân ảnh
-        //            {
-        //                using (MemoryStream ms = new MemoryStream(imageData))
-        //                {
-        //                    // Hiển thị ảnh từ dữ liệu nhị phân
-        //                    cell.Value = Image.FromStream(ms);
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+            //    // Gán ảnh vào cột kiểu hình ảnh của hàng vừa tạo
+            //    dtgProduct.Rows[rowIndex].Cells["anhsp"].Value = hinhAnh;
 
+            //    // Đặt lại selectedImagePath để chuẩn bị cho lần chọn ảnh tiếp theo
+            //    selectedImagePath = null;
+            //}
+            if (string.IsNullOrEmpty(txbTimSach.Text))
+            {
+                ClearForm();
+            }
+        }
     }
 }
