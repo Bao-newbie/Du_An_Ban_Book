@@ -143,5 +143,6 @@ namespace _3.GUI.View
                 tbxDC.Text = kh.DiaChi;
             
         }
+        //Baongoobomera
     }
 }
