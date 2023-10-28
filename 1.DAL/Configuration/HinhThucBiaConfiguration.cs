@@ -14,6 +14,7 @@ namespace _1.DAL.Configuration
         public void Configure (EntityTypeBuilder<HinhThucBia> builder)
         {
             builder.HasKey(c => c.idBia);
+            builder.Property(c => c.MaBia);
             builder.Property(c => c.LoaiBia);
 
             

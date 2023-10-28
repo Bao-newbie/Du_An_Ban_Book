@@ -63,7 +63,7 @@ namespace _3.GUI.View
             }
         }
 
-        private void OpenchildForm(Form childForm, object btnSender)
+        public void OpenchildForm(Form childForm, object btnSender)
         {
             if (activeForm != null)
             {
@@ -87,18 +87,13 @@ namespace _3.GUI.View
 
         private void btnBill_Click(object sender, EventArgs e)
         {
-            OpenchildForm(new BillInFor(), sender);
+            OpenchildForm(new View.Bill(), sender);
         }
 
         private void btnCustom_Click(object sender, EventArgs e)
         {
             OpenchildForm(new View.Customer(), sender);
 
-        }
-
-        private void btnReport_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender);
         }
 
         private void btnAccount_Click(object sender, EventArgs e)

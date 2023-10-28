@@ -79,6 +79,7 @@
             btnEditNCC = new Button();
             btnAddNCC = new Button();
             tabPage4 = new TabPage();
+            btnDeleteTL = new Button();
             label17 = new Label();
             tbxTimTL = new TextBox();
             dtgTL = new DataGridView();
@@ -89,10 +90,13 @@
             label15 = new Label();
             label16 = new Label();
             tabPage5 = new TabPage();
+            btnUpdateLB = new Button();
+            tbxMaLB = new TextBox();
+            label19 = new Label();
             label20 = new Label();
             txbTimBia = new TextBox();
-            button8 = new Button();
-            button9 = new Button();
+            btnDeleteLB = new Button();
+            btnAddLB = new Button();
             tbxTenBia = new TextBox();
             label18 = new Label();
             dtgLB = new DataGridView();
@@ -122,6 +126,7 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1263, 604);
             tabControl1.TabIndex = 0;
+            tabControl1.Tag = "";
             // 
             // tabPage1
             // 
@@ -296,6 +301,7 @@
             // tbxMaTG
             // 
             tbxMaTG.Cursor = Cursors.IBeam;
+            tbxMaTG.Enabled = false;
             tbxMaTG.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxMaTG.ForeColor = Color.Black;
             tbxMaTG.Location = new Point(69, 59);
@@ -498,6 +504,7 @@
             // tbxMaNXB
             // 
             tbxMaNXB.Cursor = Cursors.IBeam;
+            tbxMaNXB.Enabled = false;
             tbxMaNXB.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxMaNXB.ForeColor = Color.Black;
             tbxMaNXB.Location = new Point(61, 56);
@@ -631,6 +638,7 @@
             // tbxMaNCC
             // 
             tbxMaNCC.Cursor = Cursors.IBeam;
+            tbxMaNCC.Enabled = false;
             tbxMaNCC.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxMaNCC.ForeColor = Color.Black;
             tbxMaNCC.Location = new Point(58, 54);
@@ -743,6 +751,7 @@
             // tabPage4
             // 
             tabPage4.BackColor = Color.FromArgb(60, 63, 81);
+            tabPage4.Controls.Add(btnDeleteTL);
             tabPage4.Controls.Add(label17);
             tabPage4.Controls.Add(tbxTimTL);
             tabPage4.Controls.Add(dtgTL);
@@ -759,12 +768,27 @@
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Thể loại";
             // 
+            // btnDeleteTL
+            // 
+            btnDeleteTL.BackColor = SystemColors.ActiveCaptionText;
+            btnDeleteTL.Cursor = Cursors.Hand;
+            btnDeleteTL.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnDeleteTL.ForeColor = Color.White;
+            btnDeleteTL.Location = new Point(912, 172);
+            btnDeleteTL.Margin = new Padding(4);
+            btnDeleteTL.Name = "btnDeleteTL";
+            btnDeleteTL.Size = new Size(180, 55);
+            btnDeleteTL.TabIndex = 79;
+            btnDeleteTL.Text = "Xóa";
+            btnDeleteTL.UseVisualStyleBackColor = false;
+            btnDeleteTL.Click += btnDeleteTL_Click;
+            // 
             // label17
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label17.ForeColor = Color.White;
-            label17.Location = new Point(122, 221);
+            label17.Location = new Point(117, 221);
             label17.Name = "label17";
             label17.Size = new Size(100, 28);
             label17.TabIndex = 78;
@@ -774,11 +798,11 @@
             // 
             tbxTimTL.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             tbxTimTL.ForeColor = Color.Black;
-            tbxTimTL.Location = new Point(230, 215);
+            tbxTimTL.Location = new Point(243, 215);
             tbxTimTL.Margin = new Padding(5);
             tbxTimTL.Name = "tbxTimTL";
             tbxTimTL.PlaceholderText = "Nhập tên thể loại muốn tìm";
-            tbxTimTL.Size = new Size(617, 34);
+            tbxTimTL.Size = new Size(514, 34);
             tbxTimTL.TabIndex = 77;
             tbxTimTL.TextChanged += tbxTimTL_TextChanged;
             // 
@@ -800,7 +824,7 @@
             btnEditTL.Cursor = Cursors.Hand;
             btnEditTL.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnEditTL.ForeColor = Color.White;
-            btnEditTL.Location = new Point(766, 130);
+            btnEditTL.Location = new Point(912, 100);
             btnEditTL.Margin = new Padding(4);
             btnEditTL.Name = "btnEditTL";
             btnEditTL.Size = new Size(180, 55);
@@ -815,7 +839,7 @@
             btnAddTL.Cursor = Cursors.Hand;
             btnAddTL.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnAddTL.ForeColor = Color.White;
-            btnAddTL.Location = new Point(766, 25);
+            btnAddTL.Location = new Point(912, 28);
             btnAddTL.Margin = new Padding(4);
             btnAddTL.Name = "btnAddTL";
             btnAddTL.Size = new Size(180, 55);
@@ -829,21 +853,22 @@
             tbxTenTL.Cursor = Cursors.IBeam;
             tbxTenTL.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxTenTL.ForeColor = Color.Black;
-            tbxTenTL.Location = new Point(243, 140);
+            tbxTenTL.Location = new Point(243, 130);
             tbxTenTL.Margin = new Padding(5);
             tbxTenTL.Name = "tbxTenTL";
-            tbxTenTL.Size = new Size(336, 34);
+            tbxTenTL.Size = new Size(514, 34);
             tbxTenTL.TabIndex = 62;
             // 
             // tbxMaTL
             // 
             tbxMaTL.Cursor = Cursors.IBeam;
+            tbxMaTL.Enabled = false;
             tbxMaTL.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxMaTL.ForeColor = Color.Black;
             tbxMaTL.Location = new Point(243, 49);
             tbxMaTL.Margin = new Padding(5);
             tbxMaTL.Name = "tbxMaTL";
-            tbxMaTL.Size = new Size(336, 34);
+            tbxMaTL.Size = new Size(514, 34);
             tbxMaTL.TabIndex = 63;
             // 
             // label15
@@ -851,7 +876,7 @@
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label15.ForeColor = Color.White;
-            label15.Location = new Point(117, 146);
+            label15.Location = new Point(117, 136);
             label15.Name = "label15";
             label15.Size = new Size(118, 28);
             label15.TabIndex = 66;
@@ -862,7 +887,7 @@
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label16.ForeColor = Color.White;
-            label16.Location = new Point(128, 58);
+            label16.Location = new Point(117, 52);
             label16.Name = "label16";
             label16.Size = new Size(114, 28);
             label16.TabIndex = 64;
@@ -871,10 +896,13 @@
             // tabPage5
             // 
             tabPage5.BackColor = Color.FromArgb(60, 63, 81);
+            tabPage5.Controls.Add(btnUpdateLB);
+            tabPage5.Controls.Add(tbxMaLB);
+            tabPage5.Controls.Add(label19);
             tabPage5.Controls.Add(label20);
             tabPage5.Controls.Add(txbTimBia);
-            tabPage5.Controls.Add(button8);
-            tabPage5.Controls.Add(button9);
+            tabPage5.Controls.Add(btnDeleteLB);
+            tabPage5.Controls.Add(btnAddLB);
             tabPage5.Controls.Add(tbxTenBia);
             tabPage5.Controls.Add(label18);
             tabPage5.Controls.Add(dtgLB);
@@ -884,6 +912,44 @@
             tabPage5.Size = new Size(1255, 571);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Loại bìa";
+            // 
+            // btnUpdateLB
+            // 
+            btnUpdateLB.BackColor = SystemColors.ActiveCaptionText;
+            btnUpdateLB.Cursor = Cursors.Hand;
+            btnUpdateLB.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnUpdateLB.ForeColor = Color.White;
+            btnUpdateLB.Location = new Point(896, 102);
+            btnUpdateLB.Margin = new Padding(4);
+            btnUpdateLB.Name = "btnUpdateLB";
+            btnUpdateLB.Size = new Size(180, 55);
+            btnUpdateLB.TabIndex = 80;
+            btnUpdateLB.Text = "Sửa";
+            btnUpdateLB.UseVisualStyleBackColor = false;
+            btnUpdateLB.Click += btnUpdateLB_Click;
+            // 
+            // tbxMaLB
+            // 
+            tbxMaLB.Cursor = Cursors.IBeam;
+            tbxMaLB.Enabled = false;
+            tbxMaLB.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            tbxMaLB.ForeColor = Color.Black;
+            tbxMaLB.Location = new Point(223, 51);
+            tbxMaLB.Margin = new Padding(5);
+            tbxMaLB.Name = "tbxMaLB";
+            tbxMaLB.Size = new Size(520, 34);
+            tbxMaLB.TabIndex = 78;
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label19.ForeColor = Color.White;
+            label19.Location = new Point(121, 51);
+            label19.Name = "label19";
+            label19.Size = new Size(73, 28);
+            label19.TabIndex = 79;
+            label19.Text = "Mã Bìa";
             // 
             // label20
             // 
@@ -904,48 +970,49 @@
             txbTimBia.Margin = new Padding(5);
             txbTimBia.Name = "txbTimBia";
             txbTimBia.PlaceholderText = "Nhập tên loại bìa muốn tìm";
-            txbTimBia.Size = new Size(692, 34);
+            txbTimBia.Size = new Size(520, 34);
             txbTimBia.TabIndex = 76;
+            txbTimBia.TextChanged += txbTimBia_TextChanged;
             // 
-            // button8
+            // btnDeleteLB
             // 
-            button8.BackColor = SystemColors.ActiveCaptionText;
-            button8.Cursor = Cursors.Hand;
-            button8.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button8.ForeColor = Color.White;
-            button8.Location = new Point(787, 139);
-            button8.Margin = new Padding(4);
-            button8.Name = "button8";
-            button8.Size = new Size(180, 55);
-            button8.TabIndex = 75;
-            button8.Text = "Xóa";
-            button8.UseVisualStyleBackColor = false;
-            button8.Click += button8_Click;
+            btnDeleteLB.BackColor = SystemColors.ActiveCaptionText;
+            btnDeleteLB.Cursor = Cursors.Hand;
+            btnDeleteLB.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnDeleteLB.ForeColor = Color.White;
+            btnDeleteLB.Location = new Point(896, 174);
+            btnDeleteLB.Margin = new Padding(4);
+            btnDeleteLB.Name = "btnDeleteLB";
+            btnDeleteLB.Size = new Size(180, 55);
+            btnDeleteLB.TabIndex = 75;
+            btnDeleteLB.Text = "Xóa";
+            btnDeleteLB.UseVisualStyleBackColor = false;
+            btnDeleteLB.Click += btnDeleteLB_Click;
             // 
-            // button9
+            // btnAddLB
             // 
-            button9.BackColor = SystemColors.ActiveCaptionText;
-            button9.Cursor = Cursors.Hand;
-            button9.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button9.ForeColor = Color.White;
-            button9.Location = new Point(787, 30);
-            button9.Margin = new Padding(4);
-            button9.Name = "button9";
-            button9.Size = new Size(180, 55);
-            button9.TabIndex = 73;
-            button9.Text = "Thêm ";
-            button9.UseVisualStyleBackColor = false;
-            button9.Click += button9_Click;
+            btnAddLB.BackColor = SystemColors.ActiveCaptionText;
+            btnAddLB.Cursor = Cursors.Hand;
+            btnAddLB.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAddLB.ForeColor = Color.White;
+            btnAddLB.Location = new Point(896, 30);
+            btnAddLB.Margin = new Padding(4);
+            btnAddLB.Name = "btnAddLB";
+            btnAddLB.Size = new Size(180, 55);
+            btnAddLB.TabIndex = 73;
+            btnAddLB.Text = "Thêm ";
+            btnAddLB.UseVisualStyleBackColor = false;
+            btnAddLB.Click += btnAddLB_Click;
             // 
             // tbxTenBia
             // 
             tbxTenBia.Cursor = Cursors.IBeam;
             tbxTenBia.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxTenBia.ForeColor = Color.Black;
-            tbxTenBia.Location = new Point(223, 105);
+            tbxTenBia.Location = new Point(223, 129);
             tbxTenBia.Margin = new Padding(5);
             tbxTenBia.Name = "tbxTenBia";
-            tbxTenBia.Size = new Size(336, 34);
+            tbxTenBia.Size = new Size(520, 34);
             tbxTenBia.TabIndex = 70;
             // 
             // label18
@@ -953,7 +1020,7 @@
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label18.ForeColor = Color.White;
-            label18.Location = new Point(223, 72);
+            label18.Location = new Point(121, 129);
             label18.Name = "label18";
             label18.Size = new Size(82, 28);
             label18.TabIndex = 74;
@@ -969,6 +1036,7 @@
             dtgLB.RowTemplate.Height = 29;
             dtgLB.Size = new Size(1249, 311);
             dtgLB.TabIndex = 69;
+            dtgLB.CellClick += dtgLB_CellClick;
             // 
             // Menu
             // 
@@ -1059,13 +1127,17 @@
         private Label label15;
         private Label label16;
         private DataGridView dtgLB;
-        private Button button8;
-        private Button button9;
+        private Button btnDeleteLB;
+        private Button btnAddLB;
         private TextBox tbxTenBia;
         private Label label18;
         private Label label20;
         private TextBox txbTimBia;
         private TextBox tbxEmailTG;
         private Label label21;
+        private Button btnDeleteTL;
+        private Button btnUpdateLB;
+        private TextBox tbxMaLB;
+        private Label label19;
     }
 }

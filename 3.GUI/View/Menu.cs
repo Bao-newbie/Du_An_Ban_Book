@@ -37,7 +37,7 @@ namespace _3.GUI.View
             LoadDataNXB();
             LoadDataNCC();
             LoadDataTL();
-            LoadDataMB();
+            LoadDataLB();
             ClearForm();
 
         }
@@ -59,7 +59,14 @@ namespace _3.GUI.View
                 dtgAuthor.Rows.Add(item.idtacGia, item.MaTG, item.Ten, item.Tuoi, item.SDT, item.diaChi, item.Email);
             }
         }
-
+        string MaTG()
+        {
+            string ma = "TG";
+            Random rand = new Random();
+            int a = rand.Next(1000, 9999);
+            var so = a.ToString();
+            return ma + so;
+        }
         public void ClearForm()
         {
             Action<Control.ControlCollection> funct = null;
@@ -85,7 +92,7 @@ namespace _3.GUI.View
                 var tg = new TacGiaView()
                 {
                     idtacGia = Guid.NewGuid(),
-                    MaTG = tbxTenTG.Text,
+                    MaTG = MaTG(),
                     Ten = tbxTenTG.Text,
                     Tuoi = Convert.ToInt32(tbxTuoiTG.Text),
                     SDT = tbxSdtTG.Text,
@@ -195,7 +202,14 @@ namespace _3.GUI.View
                 dtgNXB.Rows.Add(item.idNXB, item.MaNXB, item.TenNXB, item.SDT, item.diaChi);
             }
         }
-
+        string MaNXB()
+        {
+            string ma = "NXB";
+            Random rand = new Random();
+            int a = rand.Next(1000, 9999);
+            var so = a.ToString();
+            return ma + so;
+        }
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -205,7 +219,7 @@ namespace _3.GUI.View
                 var tg = new NXBView()
                 {
                     idNXB = Guid.NewGuid(),
-                    MaNXB = tbxMaNXB.Text,
+                    MaNXB = MaNXB(),
                     TenNXB = tbxTenNXB.Text,
                     SDT = tbxSdtNXB.Text,
                     diaChi = tbxDcNXB.Text,
@@ -306,21 +320,29 @@ namespace _3.GUI.View
                 dtgNCC.Rows.Add(item.idNhaCC, item.MaNhaCungCap, item.TenNCC, item.SDT, item.diaChi);
             }
         }
+        string MaNCC()
+        {
+            string ma = "NCC";
+            Random rand = new Random();
+            int a = rand.Next(1000, 9999);
+            var so = a.ToString();
+            return ma + so;
+        }
         private void btnAddNCC_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var tg = new NhaCungCapView()
+                var ncc = new NhaCungCapView()
                 {
                     idNhaCC = Guid.NewGuid(),
-                    MaNhaCungCap = tbxMaNCC.Text,
+                    MaNhaCungCap = MaNCC(),
                     TenNCC = tbxTenNCC.Text,
                     SDT = tbxSdtNCC.Text,
                     diaChi = tbxDiaChiNCC.Text,
 
                 };
-                iNhaCungCap.Add(tg);
+                iNhaCungCap.Add(ncc);
                 MessageBox.Show("Thêm thành công");
                 LoadDataNCC();
                 ClearForm();
@@ -413,7 +435,14 @@ namespace _3.GUI.View
                 dtgTL.Rows.Add(item.idTheLoai, item.MaTheLoai, item.TenTheLoai);
             }
         }
-
+        string MaTL()
+        {
+            string ma = "TL";
+            Random rand = new Random();
+            int a = rand.Next(1000, 9999);
+            var so = a.ToString();
+            return ma + so;
+        }
         private void btnAddTL_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
@@ -422,7 +451,7 @@ namespace _3.GUI.View
                 var tg = new TheLoaiView()
                 {
                     idTheLoai = Guid.NewGuid(),
-                    MaTheLoai = tbxMaTL.Text,
+                    MaTheLoai = MaTL(),
                     TenTheLoai = tbxTenTL.Text,
 
                 };
@@ -456,17 +485,34 @@ namespace _3.GUI.View
                 MessageBox.Show("Sửa không thành công");
             }
         }
-
+        private void btnDeleteTL_Click(object sender, EventArgs e)
+        {
+            var x = iTheLoai.GetAll().FirstOrDefault(c => c.idTheLoai.Equals(id));
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn xóa không?", "Thông Báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                iTheLoai.Delete(x);
+                MessageBox.Show("Xoa thanh cong");
+                LoadDataTL();
+                ClearForm();
+            }
+            if (dialogResult == DialogResult.No)
+            {
+                MessageBox.Show("Xóa không thành công");
+            }
+        }
         private void tbxTimTL_TextChanged(object sender, EventArgs e)
         {
-
-            iTheLoai.GetAll().FirstOrDefault(c => c.TenTheLoai.ToLower().Contains(tbxTenTL.Text));
-
-        }
-        private void TimKiem(string name)
-        {
-            string keyword = iTheLoai.GetAll().FirstOrDefault(c=>c.MaTheLoai == name).TenTheLoai; 
-            
+            dtgTL.ColumnCount = 3;
+            dtgTL.Columns[0].HeaderText = "ID";
+            dtgTL.Columns[1].HeaderText = "Mã thể loại";
+            dtgTL.Columns[2].HeaderText = "Tên thể loại";
+            dtgTL.Columns[0].Visible = false;
+            dtgTL.Rows.Clear();
+            foreach (var item in iTheLoai.GetAll().Where(c => c.TenTheLoai.ToLower().Contains(tbxTimTL.Text)))
+            {
+                dtgTL.Rows.Add(item.idTheLoai, item.MaTheLoai, item.TenTheLoai);
+            }
         }
 
         private void dtgTL_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -480,20 +526,29 @@ namespace _3.GUI.View
         }
         #endregion
 
-        public void LoadDataMB()
+        #region
+        public void LoadDataLB()
         {
             dtgLB.ColumnCount = 3;
             dtgLB.Columns[0].HeaderText = "ID";
+            dtgLB.Columns[1].HeaderText = "Mã Bìa";
             dtgLB.Columns[2].HeaderText = "Loại bìa";
             dtgLB.Columns[0].Visible = false;
             dtgLB.Rows.Clear();
             foreach (var item in iHinhThucBia.GetAll())
             {
-                dtgLB.Rows.Add(item.idBia, item.LoaiBia);
+                dtgLB.Rows.Add(item.idBia, item.MaBia, item.LoaiBia);
             }
         }
-
-        private void button9_Click(object sender, EventArgs e)
+        string MaBia()
+        {
+            string ma = "B";
+            Random rand = new Random();
+            int a = rand.Next(1000, 9999);
+            var so = a.ToString();
+            return ma + so;
+        }
+        private void btnAddLB_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
@@ -501,12 +556,13 @@ namespace _3.GUI.View
                 var tg = new HinhThucBiaView()
                 {
                     idBia = Guid.NewGuid(),
+                    MaBia = MaBia(),
                     LoaiBia = tbxTenBia.Text,
 
                 };
                 iHinhThucBia.Add(tg);
                 MessageBox.Show("Thêm thành công");
-                LoadDataMB();
+                LoadDataLB();
                 ClearForm();
 
             }
@@ -516,7 +572,26 @@ namespace _3.GUI.View
             }
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void btnUpdateLB_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa không?", "Thông Báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                var x = iHinhThucBia.GetAll().FirstOrDefault(c => c.idBia.Equals(id));
+                x.MaBia = tbxMaLB.Text;
+                x.LoaiBia = tbxTenBia.Text;
+                iHinhThucBia.Update(x);
+                MessageBox.Show("Sửa thành công");
+                LoadDataLB();
+                ClearForm();
+            }
+            if (dialogResult == DialogResult.No)
+            {
+                MessageBox.Show("Sửa không thành công");
+            }
+        }
+
+        private void btnDeleteLB_Click(object sender, EventArgs e)
         {
             var x = iHinhThucBia.GetAll().FirstOrDefault(c => c.idBia.Equals(id));
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn xóa không?", "Thông Báo", MessageBoxButtons.YesNo);
@@ -524,7 +599,7 @@ namespace _3.GUI.View
             {
                 iHinhThucBia.Delete(x);
                 MessageBox.Show("Xoa thanh cong");
-                LoadDataMB();
+                LoadDataNCC();
                 ClearForm();
             }
             if (dialogResult == DialogResult.No)
@@ -532,5 +607,28 @@ namespace _3.GUI.View
                 MessageBox.Show("Xóa không thành công");
             }
         }
+        private void dtgLB_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rd = e.RowIndex;
+            if (rd == -1 || rd >= iHinhThucBia.GetAll().Count) return;
+            id = Guid.Parse(Convert.ToString(dtgLB.Rows[rd].Cells[0].Value));
+            var lb = iHinhThucBia.GetAll().FirstOrDefault(c => c.idBia.Equals(id));
+            tbxMaLB.Text = lb.MaBia;
+            tbxTenBia.Text = lb.LoaiBia;
+        }
+        private void txbTimBia_TextChanged(object sender, EventArgs e)
+        {
+            dtgLB.ColumnCount = 3;
+            dtgLB.Columns[0].HeaderText = "ID";
+            dtgLB.Columns[1].HeaderText = "Mã Bìa";
+            dtgLB.Columns[2].HeaderText = "Loại bìa";
+            dtgLB.Columns[0].Visible = false;
+            dtgLB.Rows.Clear();
+            foreach (var item in iHinhThucBia.GetAll().Where(x => x.LoaiBia.ToLower().Contains(txbTimBia.Text)))
+            {
+                dtgLB.Rows.Add(item.idBia, item.MaBia, item.LoaiBia);
+            }
+        }
+        #endregion
     }
 }

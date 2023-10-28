@@ -15,6 +15,11 @@ namespace _2.BUS.ViewModels
         //public HinhThucBia hinhThucBia { get; set; }
         //public TacGia TacGia { get; set; }
         public Guid IDsanPham { get; set; }
+        public Guid idTacGia { get; set; }
+        public Guid idNXB { get; set; }
+        public Guid idNhaCungCap { get; set; }
+        public Guid idTheLoai { get; set; }
+        public Guid idHinhThucBia { get; set; }
         public string MaSP { get; set; }
         public string TenSach { get; set; }
         public int SoLuongTon { get; set; }
@@ -23,17 +28,10 @@ namespace _2.BUS.ViewModels
         public string Anh { get; set; }
         public string MoTa { get; set; }
         public int TrangThai { get; set; }
-
         public string TenTG { get; set; }
         public string TenNXB { get; set; }
         public string TenNCC { get; set; }
         public string TenTheLoai { get; set; }
         public string LoaiBia { get; set; }
-
-        public Guid idTacGia { get; set; }
-        public Guid idNXB { get; set; }
-        public Guid idNhaCungCap { get; set; }
-        public Guid idTheLoai { get; set; }
-        public Guid idHinhThucBia { get; set; }
     }
 }

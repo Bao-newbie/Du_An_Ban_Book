@@ -46,10 +46,10 @@
             btnUpdate = new Button();
             btnDelete = new Button();
             btnLoadForm = new Button();
-            tbxTime = new TextBox();
             label8 = new Label();
             lbTenKH = new Label();
             txtSDT = new TextBox();
+            tbxTime = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dtgProduct).BeginInit();
             SuspendLayout();
             // 
@@ -93,7 +93,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(11, 93);
+            label2.Location = new Point(11, 82);
             label2.Name = "label2";
             label2.Size = new Size(133, 28);
             label2.TabIndex = 69;
@@ -118,7 +118,6 @@
             cbbSP.RightToLeft = RightToLeft.No;
             cbbSP.Size = new Size(420, 28);
             cbbSP.TabIndex = 70;
-            cbbSP.SelectedIndexChanged += cbbSP_SelectedIndexChanged;
             // 
             // label4
             // 
@@ -171,7 +170,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(14, 219);
+            label6.Location = new Point(14, 195);
             label6.Name = "label6";
             label6.Size = new Size(193, 28);
             label6.TabIndex = 77;
@@ -191,6 +190,7 @@
             // tbxTien
             // 
             tbxTien.Cursor = Cursors.IBeam;
+            tbxTien.Enabled = false;
             tbxTien.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxTien.ForeColor = Color.Black;
             tbxTien.Location = new Point(437, 224);
@@ -250,19 +250,12 @@
             btnLoadForm.Text = "Làm Mới";
             btnLoadForm.UseVisualStyleBackColor = true;
             // 
-            // tbxTime
-            // 
-            tbxTime.Location = new Point(14, 249);
-            tbxTime.Name = "tbxTime";
-            tbxTime.Size = new Size(319, 27);
-            tbxTime.TabIndex = 86;
-            // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = Color.White;
-            label8.Location = new Point(11, 168);
+            label8.Location = new Point(11, 157);
             label8.Name = "label8";
             label8.Size = new Size(167, 28);
             label8.TabIndex = 87;
@@ -273,7 +266,7 @@
             lbTenKH.AutoSize = true;
             lbTenKH.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lbTenKH.ForeColor = Color.White;
-            lbTenKH.Location = new Point(181, 168);
+            lbTenKH.Location = new Point(181, 157);
             lbTenKH.Name = "lbTenKH";
             lbTenKH.Size = new Size(27, 28);
             lbTenKH.TabIndex = 89;
@@ -284,12 +277,24 @@
             txtSDT.Cursor = Cursors.IBeam;
             txtSDT.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtSDT.ForeColor = Color.Black;
-            txtSDT.Location = new Point(14, 127);
+            txtSDT.Location = new Point(14, 116);
             txtSDT.Margin = new Padding(5);
             txtSDT.Multiline = true;
             txtSDT.Name = "txtSDT";
             txtSDT.Size = new Size(319, 36);
             txtSDT.TabIndex = 90;
+            // 
+            // tbxTime
+            // 
+            tbxTime.Cursor = Cursors.IBeam;
+            tbxTime.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            tbxTime.ForeColor = Color.Black;
+            tbxTime.Location = new Point(14, 228);
+            tbxTime.Margin = new Padding(5);
+            tbxTime.Multiline = true;
+            tbxTime.Name = "tbxTime";
+            tbxTime.Size = new Size(319, 36);
+            tbxTime.TabIndex = 91;
             // 
             // BillInFor
             // 
@@ -297,10 +302,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(60, 63, 81);
             ClientSize = new Size(1238, 651);
+            Controls.Add(tbxTime);
             Controls.Add(txtSDT);
             Controls.Add(lbTenKH);
             Controls.Add(label8);
-            Controls.Add(tbxTime);
             Controls.Add(btnLoadForm);
             Controls.Add(btnDelete);
             Controls.Add(btnUpdate);
@@ -346,9 +351,9 @@
         private Button btnUpdate;
         private Button btnDelete;
         private Button btnLoadForm;
-        private TextBox tbxTime;
         private Label label8;
         private Label lbTenKH;
         private TextBox txtSDT;
+        private TextBox tbxTime;
     }
 }

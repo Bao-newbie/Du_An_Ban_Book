@@ -29,6 +29,7 @@ namespace _2.BUS.Service
             var hinhthucBia = new HinhThucBia()
             {
                 idBia = Guid.NewGuid(),
+                MaBia= hinhThucBiaView.MaBia,
                 LoaiBia = hinhThucBiaView.LoaiBia
             };
             if(iHinhThucBiaRp.Add(hinhthucBia)) return true;
@@ -51,6 +52,7 @@ namespace _2.BUS.Service
                 select new HinhThucBiaView()
                 {
                     idBia = a.idBia,
+                    MaBia = a.MaBia,
                     LoaiBia = a.LoaiBia,
                 }
                 ).ToList();
@@ -61,6 +63,7 @@ namespace _2.BUS.Service
         {
             if (hinhThucBiaView == null) return false;
             var bia = iHinhThucBiaRp.GetAll().FirstOrDefault(c => c.idBia == hinhThucBiaView.idBia);
+            bia.MaBia = hinhThucBiaView.MaBia;
             bia.LoaiBia = hinhThucBiaView.LoaiBia;
             if (iHinhThucBiaRp.Update(bia)) return true;
             return false;

@@ -9,6 +9,7 @@ namespace Du_An_Ban_Sach._1.DAL.Models
     public class HinhThucBia
     {
         public Guid idBia { get; set; }
+        public string MaBia { get; set; }
         public string LoaiBia { get; set; }
 
         public virtual List<SanPham> SanPhams { get; set; }

@@ -42,9 +42,10 @@ namespace _3.GUI.View
                 dtgBill.Rows.Add(x.iDhoaDon, x.khachHang.MaKH, x.khachHang.Ten, x.HoaDonChiTiet.TongTien, x.trangThai, x.ngayThanhToan);
             }
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void btnBill_Click(object sender, EventArgs e)
         {
-
+            BillInFor billInFor = new BillInFor();
+            billInFor.ShowDialog();
         }
     }
 }

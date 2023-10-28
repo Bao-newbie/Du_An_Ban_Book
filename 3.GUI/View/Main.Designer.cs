@@ -32,7 +32,6 @@
             panelMenu = new Panel();
             button1 = new Button();
             btnEmployee = new Button();
-            btnReport = new Button();
             btnCustom = new Button();
             btnBill = new Button();
             btnProduct = new Button();
@@ -49,7 +48,6 @@
             panelMenu.BackColor = Color.FromArgb(40, 42, 52);
             panelMenu.Controls.Add(button1);
             panelMenu.Controls.Add(btnEmployee);
-            panelMenu.Controls.Add(btnReport);
             panelMenu.Controls.Add(btnCustom);
             panelMenu.Controls.Add(btnBill);
             panelMenu.Controls.Add(btnProduct);
@@ -90,7 +88,7 @@
             btnEmployee.ForeColor = Color.Gainsboro;
             btnEmployee.Image = (Image)resources.GetObject("btnEmployee.Image");
             btnEmployee.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEmployee.Location = new Point(0, 405);
+            btnEmployee.Location = new Point(0, 342);
             btnEmployee.Name = "btnEmployee";
             btnEmployee.Padding = new Padding(18, 0, 0, 0);
             btnEmployee.Size = new Size(255, 63);
@@ -100,26 +98,6 @@
             btnEmployee.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnEmployee.UseVisualStyleBackColor = true;
             btnEmployee.Click += btnEmployee_Click;
-            // 
-            // btnReport
-            // 
-            btnReport.Dock = DockStyle.Top;
-            btnReport.FlatAppearance.BorderSize = 0;
-            btnReport.FlatStyle = FlatStyle.Flat;
-            btnReport.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnReport.ForeColor = Color.Gainsboro;
-            btnReport.Image = (Image)resources.GetObject("btnReport.Image");
-            btnReport.ImageAlign = ContentAlignment.MiddleLeft;
-            btnReport.Location = new Point(0, 342);
-            btnReport.Name = "btnReport";
-            btnReport.Padding = new Padding(18, 0, 0, 0);
-            btnReport.Size = new Size(255, 63);
-            btnReport.TabIndex = 4;
-            btnReport.Text = "    Thống Kê";
-            btnReport.TextAlign = ContentAlignment.MiddleLeft;
-            btnReport.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnReport.UseVisualStyleBackColor = true;
-            btnReport.Click += btnReport_Click;
             // 
             // btnCustom
             // 
@@ -242,7 +220,6 @@
         private Panel panelMenu;
         private Panel panelLogo;
         private Button btnProduct;
-        private Button btnReport;
         private Button btnCustom;
         private Button btnBill;
         private Button btnEmployee;

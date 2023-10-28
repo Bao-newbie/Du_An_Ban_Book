@@ -9,17 +9,16 @@ namespace _2.BUS.ViewModels
 {
     public class HoaDonView
     {
-        public KhachHang khachHang { get; set; }
-        public HoaDonChiTiet HoaDonChiTiet { get; set; }
+        public Guid iDnhanVien { get; set; }
+        public Guid iDkhachHang { get; set; }
         public Guid iDhoaDon { get; set; }
         public string MaHD { get; set; }
-        //public Guid iDnhanVien { get; set; }
-        public Guid iDkhachHang { get; set; }
+        public string TenNV { get; set; }
         public DateTime ngayThanhToan { get; set; }
         public int trangThai { get; set; }
-
         public string maKH { get; set; }
         public string tenKH { get; set; }
-
+        public KhachHang khachHang { get; set; }
+        public HoaDonChiTiet HoaDonChiTiet { get; set; }
     }
 }

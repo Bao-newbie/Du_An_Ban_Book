@@ -1,4 +1,5 @@
-﻿using Du_An_Ban_Sach._1.DAL.Models;
+﻿using _1.DAL.Models;
+using Du_An_Ban_Sach._1.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace _1.DAL.SachDbContext
         public DbSet<TacGia> tacGias { get; set; }
         public DbSet<SanPham> sanPhams { get; set; }
         public DbSet<TheLoai> theLoais { get; set; }
+        public DbSet<NhanVien> nhanViens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

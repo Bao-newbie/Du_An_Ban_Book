@@ -12,7 +12,7 @@ using _1.DAL.SachDbContext;
 namespace _1.DAL.Migrations
 {
     [DbContext(typeof(DbSach))]
-    [Migration("20230719172438_Sach")]
+    [Migration("20231020091820_Sach")]
     partial class Sach
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,48 @@ namespace _1.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("_1.DAL.Models.NhanVien", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ChucVu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiaChi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HoTen")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SDT")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TrangThai")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("nhanViens");
+                });
+
             modelBuilder.Entity("Du_An_Ban_Sach._1.DAL.Models.HinhThucBia", b =>
                 {
                     b.Property<Guid>("idBia")
@@ -31,6 +73,10 @@ namespace _1.DAL.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoaiBia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaBia")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -58,9 +104,14 @@ namespace _1.DAL.Migrations
                     b.Property<Guid>("idKhachHang")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("idNhanVien")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("IDHoaDon");
 
                     b.HasIndex("idKhachHang");
+
+                    b.HasIndex("idNhanVien");
 
                     b.ToTable("hoaDons");
                 });
@@ -302,7 +353,15 @@ namespace _1.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("_1.DAL.Models.NhanVien", "NhanVien")
+                        .WithMany("hoaDons")
+                        .HasForeignKey("idNhanVien")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("KhachHang");
+
+                    b.Navigation("NhanVien");
                 });
 
             modelBuilder.Entity("Du_An_Ban_Sach._1.DAL.Models.HoaDonChiTiet", b =>
@@ -365,6 +424,11 @@ namespace _1.DAL.Migrations
                     b.Navigation("TacGia");
 
                     b.Navigation("TheLoai");
+                });
+
+            modelBuilder.Entity("_1.DAL.Models.NhanVien", b =>
+                {
+                    b.Navigation("hoaDons");
                 });
 
             modelBuilder.Entity("Du_An_Ban_Sach._1.DAL.Models.HinhThucBia", b =>

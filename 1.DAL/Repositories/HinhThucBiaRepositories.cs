@@ -54,6 +54,7 @@ namespace _1.DAL.Repositories
             }
             var obj = context.hinhThucBias.FirstOrDefault(c => c.idBia == hinhThucBia.idBia);
             obj.idBia = hinhThucBia.idBia;
+            obj.MaBia = hinhThucBia.MaBia;
             obj.LoaiBia = hinhThucBia.LoaiBia;
             context.hinhThucBias.Update(obj);
             context.SaveChanges();
