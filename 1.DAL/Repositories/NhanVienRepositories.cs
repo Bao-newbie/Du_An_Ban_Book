@@ -52,13 +52,13 @@ namespace _1.DAL.Repositories
             }
             var obj = context.nhanViens.FirstOrDefault(x => x.Id == nhanVien.Id);
             obj.Id=nhanVien.Id;
+            obj.MaNV=nhanVien.MaNV;
             obj.HoTen= nhanVien.HoTen;
             obj.Email= nhanVien.Email;
             obj.SDT= nhanVien.SDT;
             obj.DiaChi = nhanVien.DiaChi;
             obj.ChucVu= nhanVien.ChucVu;
             obj.TrangThai= nhanVien.TrangThai;
-            obj.Username= nhanVien.Username;
             obj.Password= nhanVien.Password;
             context.nhanViens.Update(nhanVien);
             context.SaveChanges();

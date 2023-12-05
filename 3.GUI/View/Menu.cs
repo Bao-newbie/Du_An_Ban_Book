@@ -599,7 +599,7 @@ namespace _3.GUI.View
             {
                 iHinhThucBia.Delete(x);
                 MessageBox.Show("Xoa thanh cong");
-                LoadDataNCC();
+                LoadDataLB();
                 ClearForm();
             }
             if (dialogResult == DialogResult.No)
