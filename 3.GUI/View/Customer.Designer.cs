@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            tbxSdtKH = new Label();
+            lable2 = new Label();
             label3 = new Label();
             tbxDiaChi = new Label();
             tbxMaKH = new TextBox();
@@ -55,16 +55,16 @@
             label1.TabIndex = 0;
             label1.Text = "Mã Khách hàng";
             // 
-            // tbxSdtKH
+            // lable2
             // 
-            tbxSdtKH.AutoSize = true;
-            tbxSdtKH.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            tbxSdtKH.ForeColor = Color.White;
-            tbxSdtKH.Location = new Point(660, 38);
-            tbxSdtKH.Name = "tbxSdtKH";
-            tbxSdtKH.Size = new Size(49, 28);
-            tbxSdtKH.TabIndex = 1;
-            tbxSdtKH.Text = "SDT";
+            lable2.AutoSize = true;
+            lable2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lable2.ForeColor = Color.White;
+            lable2.Location = new Point(631, 35);
+            lable2.Name = "lable2";
+            lable2.Size = new Size(49, 28);
+            lable2.TabIndex = 1;
+            lable2.Text = "SDT";
             // 
             // label3
             // 
@@ -91,6 +91,7 @@
             // tbxMaKH
             // 
             tbxMaKH.Cursor = Cursors.IBeam;
+            tbxMaKH.Enabled = false;
             tbxMaKH.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxMaKH.ForeColor = Color.Black;
             tbxMaKH.Location = new Point(223, 32);
@@ -186,6 +187,7 @@
             btnExl.TabIndex = 14;
             btnExl.Text = "Xuất Excel";
             btnExl.UseVisualStyleBackColor = false;
+            btnExl.Click += btnExl_Click;
             // 
             // txbTimKH
             // 
@@ -216,7 +218,7 @@
             Controls.Add(tbxMaKH);
             Controls.Add(tbxDiaChi);
             Controls.Add(label3);
-            Controls.Add(tbxSdtKH);
+            Controls.Add(lable2);
             Controls.Add(label1);
             Name = "Customer";
             Text = "Customer";
@@ -228,7 +230,7 @@
         #endregion
 
         private Label label1;
-        private Label tbxSdtKH;
+        private Label lable2;
         private Label label3;
         private Label tbxDiaChi;
         private TextBox tbxMaKH;

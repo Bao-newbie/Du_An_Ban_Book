@@ -109,7 +109,7 @@ namespace _3.GUI.View
         private void button1_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-        }
+        }//alo alo 123
 
         private void label1_Click(object sender, EventArgs e)
         {

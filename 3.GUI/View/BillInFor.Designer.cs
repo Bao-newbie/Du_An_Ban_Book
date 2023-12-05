@@ -50,6 +50,7 @@
             lbTenKH = new Label();
             txtSDT = new TextBox();
             tbxTime = new TextBox();
+            label9 = new Label();
             ((System.ComponentModel.ISupportInitialize)dtgProduct).BeginInit();
             SuspendLayout();
             // 
@@ -68,6 +69,7 @@
             // tbxTenNV
             // 
             tbxTenNV.Cursor = Cursors.IBeam;
+            tbxTenNV.Enabled = false;
             tbxTenNV.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxTenNV.ForeColor = Color.Black;
             tbxTenNV.Location = new Point(14, 41);
@@ -76,6 +78,7 @@
             tbxTenNV.Name = "tbxTenNV";
             tbxTenNV.Size = new Size(319, 36);
             tbxTenNV.TabIndex = 67;
+            tbxTenNV.Text = "Đang Update .....";
             // 
             // label1
             // 
@@ -296,12 +299,21 @@
             tbxTime.Size = new Size(319, 36);
             tbxTime.TabIndex = 91;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(261, 9);
+            label9.Name = "label9";
+            label9.Size = new Size(0, 20);
+            label9.TabIndex = 92;
+            // 
             // BillInFor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(60, 63, 81);
             ClientSize = new Size(1238, 651);
+            Controls.Add(label9);
             Controls.Add(tbxTime);
             Controls.Add(txtSDT);
             Controls.Add(lbTenKH);
@@ -355,5 +367,6 @@
         private Label lbTenKH;
         private TextBox txtSDT;
         private TextBox tbxTime;
+        private Label label9;
     }
 }

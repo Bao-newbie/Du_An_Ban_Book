@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _1.DAL.SachDbContext;
 
@@ -11,9 +12,10 @@ using _1.DAL.SachDbContext;
 namespace _1.DAL.Migrations
 {
     [DbContext(typeof(DbSach))]
-    partial class DbSachModelSnapshot : ModelSnapshot
+    [Migration("20231031030138_CC")]
+    partial class CC
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

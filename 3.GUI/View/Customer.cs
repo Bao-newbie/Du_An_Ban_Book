@@ -1,6 +1,7 @@
 ﻿using _2.BUS.IService;
 using _2.BUS.Service;
 using _2.BUS.ViewModels;
+using ClosedXML.Excel;
 using Du_An_Ban_Sach._1.DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,14 @@ namespace _3.GUI.View
             dtgCustomer.Columns[3].Width = 308;
             dtgCustomer.Columns[4].Width = 308;
         }
+        string Ma()
+        {
+            string ma = "KH";
+            Random rand = new Random();
+            int a = rand.Next(1000, 9999);
+            var so = a.ToString();
+            return ma + so;
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -65,7 +74,7 @@ namespace _3.GUI.View
                 var kh = new KhachHangView()
                 {
                     IdKhachHang = Guid.NewGuid(),
-                    MaKh = tbxMaKH.Text,
+                    MaKh = Ma(),
                     Ten = tbxTenKH.Text,
                     sdt = tbxSDT.Text,
                     DiaChi = tbxDC.Text,
@@ -127,7 +136,7 @@ namespace _3.GUI.View
         {
             tbxMaKH.Text = "";
             tbxTenKH.Text = "";
-            tbxSdtKH.Text = "";
+            tbxSDT.Text = "";
             tbxDC.Text = "";
         }
 
@@ -135,13 +144,81 @@ namespace _3.GUI.View
         {
             int rd = e.RowIndex;
             if (rd == -1 || rd >= iKhachHang.GetAll().Count) return;
-                id = Guid.Parse(dtgCustomer.CurrentRow.Cells[0].Value.ToString());
-                var kh = iKhachHang.GetAll().FirstOrDefault(c => c.IdKhachHang.Equals(id));
-                tbxMaKH.Text = kh.MaKh;
-                tbxTenKH.Text = kh.Ten;
-                tbxSDT.Text = kh.sdt;
-                tbxDC.Text = kh.DiaChi;
-            
+            id = Guid.Parse(dtgCustomer.CurrentRow.Cells[0].Value.ToString());
+            var kh = iKhachHang.GetAll().FirstOrDefault(c => c.IdKhachHang.Equals(id));
+            tbxMaKH.Text = kh.MaKh;
+            tbxTenKH.Text = kh.Ten;
+            tbxSDT.Text = kh.sdt;
+            tbxDC.Text = kh.DiaChi;
+
+        }
+        private void ExportToExcelFromDataGridView(DataGridView dgv, string filePath)
+        {
+            var workbook = new XLWorkbook(filePath);
+            var worksheet = workbook.Worksheets.Add("Khách Hàng");
+
+            // Ghi tiêu đề cột
+            int col = 1;
+            foreach (DataGridViewColumn column in dgv.Columns)
+            {
+                worksheet.Cell(1, col).Value = column.HeaderText;
+                col++;
+            }
+
+            // Ghi dữ liệu từ DataGridView
+            int row = 2;
+            foreach (DataGridViewRow dgvRow in dgv.Rows)
+            {
+                col = 1;
+                foreach (DataGridViewCell cell in dgvRow.Cells)
+                {
+                    if (cell.Value != null)
+                    {
+                        if (cell.Value is Guid guidValue)
+                        {
+                            // Chuyển đổi giá trị Guid thành chuỗi trước khi ghi vào Excel
+                            worksheet.Cell(row, col).Value = guidValue.ToString();
+                        }
+                        else
+                        {
+                            // Ghi các kiểu dữ liệu khác
+                            worksheet.Cell(row, col).Value = (XLCellValue)cell.Value;
+                        }
+                    }
+                    col++;
+                }
+                row++;
+            }
+
+            workbook.Save();
+        }
+
+        private void btnExl_Click(object sender, EventArgs e)
+        {
+            //var workbook = new XLWorkbook();
+            //var worksheet = workbook.Worksheets.Add("Sheet1");
+            //for (int i = 0; i < dtgCustomer.Rows.Count; i++)
+            //{
+            //    for (int j = 0; j < dtgCustomer.Columns.Count; j++)
+            //    {
+            //        worksheet.Cell(i + 2, j + 1).Value = dtgCustomer[i, j].Value.ToString();
+            //    }
+            //}
+            //var savedialog=new SaveFileDialog();
+            //savedialog.Filter = "Danh Sách Khách Hàng|*.xlsx";
+            //if (savedialog.ShowDialog()==DialogResult.OK)
+            //{
+            //    workbook.SaveAs(savedialog.FileName);
+            //}
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel Files|*.xlsx";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+                ExportToExcelFromDataGridView(dtgCustomer, filePath);
+                MessageBox.Show("Dữ liệu đã được xuất ra Excel.");
+            }
         }
         //Baongoobomera
     }
