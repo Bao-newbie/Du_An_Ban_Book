@@ -13,7 +13,7 @@ namespace Du_An_Ban_Sach._1.DAL.Models
         public string TenNhaCungCap { get; set; }
         public string SdtNCC { get; set; }
         public string DiaCHi { get; set; }
-
+        public int trangThai { get; set; }
         public virtual List<SanPham> SanPhams { get; set; }
     }
 }
