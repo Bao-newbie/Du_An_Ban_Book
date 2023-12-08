@@ -57,6 +57,7 @@ namespace _1.DAL.Repositories
             obj.TenNXB = nXB.TenNXB;
             obj.SDT = nXB.SDT;
             obj.DiaChi = nXB.DiaChi;
+            obj.trangThai = nXB.trangThai;
             context.nXBs.Update(obj);
             context.SaveChanges();
             return true;

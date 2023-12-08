@@ -28,7 +28,9 @@ namespace _2.BUS.Service
                 MaNCC = obj.MaNhaCungCap,
                 TenNhaCungCap = obj.TenNCC,
                 SdtNCC = obj.SDT,
-                DiaCHi = obj.diaChi
+                DiaCHi = obj.diaChi,
+                trangThai = obj.trangThai,
+                
             };
             if (iNhaCungCap.Add(ncc)) return true;
             return false;
@@ -52,7 +54,8 @@ namespace _2.BUS.Service
                        MaNhaCungCap = a.MaNCC,
                        TenNCC = a.TenNhaCungCap,
                        SDT = a.SdtNCC,
-                       diaChi = a.DiaCHi
+                       diaChi = a.DiaCHi,
+                       trangThai = a.trangThai,
                    }).ToList();
             return lst;
         }
@@ -65,6 +68,7 @@ namespace _2.BUS.Service
             ncc.TenNhaCungCap = obj.TenNCC;
             ncc.SdtNCC = obj.SDT;
             ncc.DiaCHi = obj.diaChi;
+            ncc.trangThai = obj.trangThai;
             if(iNhaCungCap.Update(ncc) ) return true;
             return false;
         }

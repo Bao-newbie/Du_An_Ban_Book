@@ -57,6 +57,7 @@ namespace _1.DAL.Repositories
             obj.TenNhaCungCap = nhaCungCap.TenNhaCungCap;
             obj.SdtNCC = nhaCungCap.SdtNCC;
             obj.DiaCHi = nhaCungCap.DiaCHi;
+            obj.trangThai = nhaCungCap.trangThai;
             context.nhaCungCaps.Update(obj);
             context.SaveChanges();
             return true;

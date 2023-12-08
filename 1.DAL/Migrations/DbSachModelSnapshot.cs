@@ -347,9 +347,6 @@ namespace _1.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("trangThai")
-                        .HasColumnType("int");
-
                     b.HasKey("IDTheLoai");
 
                     b.ToTable("theLoais");

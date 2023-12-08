@@ -44,7 +44,7 @@ namespace _3.GUI.View
         #region
         public void LoadData()
         {
-            dtgAuthor.ColumnCount = 7;
+            dtgAuthor.ColumnCount = 8;
             dtgAuthor.Columns[0].HeaderText = "ID";
             dtgAuthor.Columns[1].HeaderText = "Mã TG";
             dtgAuthor.Columns[2].HeaderText = "Tên TG";
@@ -52,12 +52,13 @@ namespace _3.GUI.View
             dtgAuthor.Columns[4].HeaderText = "SDT";
             dtgAuthor.Columns[5].HeaderText = "Địa chỉ";
             dtgAuthor.Columns[6].HeaderText = "Email";
+            dtgAuthor.Columns[7].HeaderText = "Trạng thái";
             dtgAuthor.Columns[0].Visible = false;
             dtgAuthor.Rows.Clear();
             foreach (var item in iTacGia.GetAll())
             {
-                dtgAuthor.Rows.Add(item.idtacGia, item.MaTG, item.Ten, item.Tuoi, item.SDT, item.diaChi, item.Email);
-            }
+                dtgAuthor.Rows.Add(item.idtacGia, item.MaTG, item.Ten, item.Tuoi, item.SDT, item.diaChi, item.Email, item.trangThai == 1 ?"Hoạt động" : "Không hoạt động");
+            } 
         }
         string MaTG()
         {

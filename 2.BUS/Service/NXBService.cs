@@ -30,6 +30,7 @@ namespace _2.BUS.Service
                        TenNXB = a.TenNXB,
                        SDT = a.SDT,
                        diaChi = a.DiaChi,
+                       trangThai = a.trangThai,
 
                    }).ToList();
             return lst;
@@ -48,7 +49,7 @@ namespace _2.BUS.Service
                 TenNXB = obj.TenNXB,
                 SDT = obj.SDT,
                 DiaChi = obj.diaChi,
-
+                trangThai = obj.trangThai,
             };
             if (iNxbRp.Add(nxb)) return true;
             return false;
@@ -70,6 +71,7 @@ namespace _2.BUS.Service
             nxb.TenNXB = obj.TenNXB;
             nxb.SDT = obj.SDT;
             nxb.DiaChi = obj.diaChi;
+            nxb.trangThai = obj .trangThai;
             if (iNxbRp.Update(nxb)) return true;
             return false;
         }

@@ -13,5 +13,6 @@ namespace _2.BUS.ViewModels
         public string TenNCC { get; set; }
         public string SDT { get; set; }
         public string diaChi { get; set; }
+        public int trangThai { get; set; }
     }
 }

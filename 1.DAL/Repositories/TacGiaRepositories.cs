@@ -60,6 +60,7 @@ namespace _1.DAL.Repositories
             obj.DiaChi = tacGia.DiaChi;
             obj.SDT = tacGia.SDT;
             obj.Email = tacGia.Email;
+            obj.trangThai = tacGia.trangThai;
             context.tacGias.Update(obj);
             context.SaveChanges();
             return true;

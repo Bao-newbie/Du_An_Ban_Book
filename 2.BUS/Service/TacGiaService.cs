@@ -30,6 +30,7 @@ namespace _2.BUS.Service
                 DiaChi = obj.diaChi,
                 Email = obj.Email,
                 SDT = obj.SDT,
+                trangThai = obj.trangThai,
             };
             if (iRp.Add(ncc)) return true;
             return false;
@@ -56,6 +57,7 @@ namespace _2.BUS.Service
                        diaChi = a.DiaChi,
                        Email = a.Email,
                        SDT = a.SDT,
+                       trangThai = a.trangThai,
                    }).ToList();
             return lst;
         }
@@ -70,6 +72,7 @@ namespace _2.BUS.Service
             ncc.DiaChi = obj.diaChi;
             ncc.Email = obj.Email;
             ncc.SDT = obj.SDT;
+            ncc.trangThai = obj.trangThai;
             if (iRp.Update(ncc)) return true;
             return false;
         }
