@@ -26,7 +26,7 @@ namespace _3.GUI.View
         SanPham _ctsp;
         Guid id;
 
-        private Image AnhURL ;
+        private Image AnhURL;
         private string imgLocation;
         private string selectedImagePath;
         public BookStore()

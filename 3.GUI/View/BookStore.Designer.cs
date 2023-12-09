@@ -378,7 +378,6 @@
             rBtnConHang.Name = "rBtnConHang";
             rBtnConHang.Size = new Size(126, 32);
             rBtnConHang.TabIndex = 93;
-            rBtnConHang.TabStop = true;
             rBtnConHang.Text = "Còn Hàng";
             rBtnConHang.UseVisualStyleBackColor = false;
             // 
@@ -392,7 +391,6 @@
             rBtnHetHang.Name = "rBtnHetHang";
             rBtnHetHang.Size = new Size(116, 32);
             rBtnHetHang.TabIndex = 94;
-            rBtnHetHang.TabStop = true;
             rBtnHetHang.Text = "Hết Hàng";
             rBtnHetHang.UseVisualStyleBackColor = false;
             // 
