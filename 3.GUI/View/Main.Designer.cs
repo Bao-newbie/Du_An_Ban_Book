@@ -39,8 +39,11 @@
             panel1 = new Panel();
             label1 = new Label();
             pnlDesktop = new Panel();
+            pictureBox1 = new PictureBox();
             panelMenu.SuspendLayout();
+            panelLogo.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panelMenu
@@ -161,6 +164,7 @@
             // 
             // panelLogo
             // 
+            panelLogo.Controls.Add(pictureBox1);
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
             panelLogo.Name = "panelLogo";
@@ -196,6 +200,17 @@
             pnlDesktop.Size = new Size(1281, 651);
             pnlDesktop.TabIndex = 2;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Dock = DockStyle.Left;
+            pictureBox1.Image = Properties.Resources._04987c26aed84a227e522be830b4c16e;
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(255, 153);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -210,8 +225,10 @@
             Name = "Main";
             Text = "Main";
             panelMenu.ResumeLayout(false);
+            panelLogo.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -227,5 +244,6 @@
         private Panel panel1;
         private Panel pnlDesktop;
         private Label label1;
+        private PictureBox pictureBox1;
     }
 }
