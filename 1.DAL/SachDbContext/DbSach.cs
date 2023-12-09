@@ -35,7 +35,8 @@ namespace _1.DAL.SachDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=QUAN\SQLEXPRESS;Initial Catalog=Sach2H;Integrated Security=True");
+            //optionsBuilder.UseSqlServer(@"Data Source=QUAN\SQLEXPRESS;Initial Catalog=Sach2H;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=POOR-LAPTOP;Initial Catalog=BookStore;Integrated Security=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

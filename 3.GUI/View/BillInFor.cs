@@ -102,44 +102,6 @@ namespace _3.GUI
                 hoaDonChiTietService.Add(hdct);
                 MessageBox.Show("Them thanh cong");
             }
-            //DialogResult result = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
-            //if (result == DialogResult.Yes)
-            //{
-            //    double tong = 0;
-            //    foreach (var x in hoaDonChiTietService.GetAll())
-            //    {
-            //        tong += x.giaBan * x.soLuong;
-            //    }
-            //    var sp = sanPhamService.GetAll().FirstOrDefault(c => c.TenSach == cbbSP.Text);
-            //    var kh = khachHangService.GetAll().FirstOrDefault(c => c.sdt == txtSDT.Text);
-
-
-            //    HoaDonChiTietvIEW hdct = new HoaDonChiTietvIEW();
-
-            //    hdct.soLuong = Convert.ToInt32(tbxSoLuong.Text);
-            //    hdct.tongTien = tong;
-            //    hdct.MaHDCt = Ma();
-            //    hdct.idSanPham = sanPhamService.GetAll().Where(c => c.TenSach == cbbSP.Text).Select(c => c.IDsanPham).FirstOrDefault();
-            //    //hdct.idSanPham = sanPhamService.GetAll().Where(c => c.GiaBan == Convert.ToDouble(tbxGia.Text)).Select(c => c.IDsanPham).FirstOrDefault();
-            //    hdct.IdHoaDon = hoaDonService.GetAll().Where(c => c.ngayThanhToan == Convert.ToDateTime(tbxTime.Text)).Select(c => c.iDhoaDon).FirstOrDefault();
-
-            //    foreach (var x in hoaDonService.GetAll())
-            //    {
-            //        HoaDonView hd = new HoaDonView();
-            //        hd.iDhoaDon = hdct.IdHoaDon;
-            //        hd.MaHD = Ma();
-            //        hd.iDkhachHang = kh.IdKhachHang;
-            //        hd.ngayThanhToan = DateTime.Now;
-            //        hd.trangThai = 0;
-
-            //    }
-            //    hoaDonChiTietService.Add(hdct);
-            //    MessageBox.Show("Them thanh cong");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Them that bai cmnr");
-            //}
         }
         // ok
         public double GetPrice1(string tenSp)
@@ -154,11 +116,11 @@ namespace _3.GUI
         // error
         private void cbbSP_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (cbbSP.SelectedIndex >= 0)
-            //{
-            //    double giaSp = GetPrice1(cbbSP.SelectedItem.ToString());
-            //    tbxGia.Text = giaSp.ToString() + "VND";
-            //}
+            if (cbbSP.SelectedIndex >= 0)
+            {
+                double giaSp = GetPrice1(cbbSP.SelectedItem.ToString());
+                tbxGia.Text = giaSp.ToString() + "VND";
+            }
         }
         //ok
         public string GetSDT(string Sdt)
