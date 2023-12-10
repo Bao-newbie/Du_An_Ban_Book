@@ -25,6 +25,7 @@ namespace _2.BUS.Service
             var nv = new NhanVien()
             {
                 Id = Guid.NewGuid(),
+                MaNV = nhanVienView.maNv,
                 HoTen = nhanVienView.HoTen,
                 Email = nhanVienView.Email,
                 SDT = nhanVienView.SDT,
@@ -37,13 +38,7 @@ namespace _2.BUS.Service
             return false;
         }
 
-        public bool Delete(NhanVienView nhanVienView)
-        {
-            if (nhanVienView == null) return false;
-            var nv = iNhanVien.GetAll().FirstOrDefault(c => c.Id == nhanVienView.idNV);
-            if (iNhanVien.Delete(nv)) return true;
-            return false;
-        }
+
 
         public List<NhanVienView> GetAll()
         {
@@ -52,6 +47,7 @@ namespace _2.BUS.Service
                    select new NhanVienView
                    {
                        idNV = a.Id,
+                       maNv = a.MaNV,
                        HoTen = a.HoTen,
                        Email = a.Email,
                        SDT = a.SDT,
@@ -68,6 +64,7 @@ namespace _2.BUS.Service
             if (nhanVienView == null) return false;
             var nv = iNhanVien.GetAll().FirstOrDefault(x=>x.Id == nhanVienView.idNV);
             nv.HoTen = nhanVienView.HoTen;
+            nv.MaNV = nhanVienView.maNv;
             nv.Email= nhanVienView.Email;
             nv.SDT = nhanVienView.SDT;
             nv.DiaChi = nhanVienView.DiaChi;

@@ -36,19 +36,21 @@
             btnBill = new Button();
             btnProduct = new Button();
             panelLogo = new Panel();
+            pictureBox1 = new PictureBox();
             panel1 = new Panel();
             label1 = new Label();
             pnlDesktop = new Panel();
-            pictureBox1 = new PictureBox();
+            btnMenu = new Button();
             panelMenu.SuspendLayout();
             panelLogo.SuspendLayout();
-            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panelMenu
             // 
             panelMenu.BackColor = Color.FromArgb(40, 42, 52);
+            panelMenu.Controls.Add(btnMenu);
             panelMenu.Controls.Add(button1);
             panelMenu.Controls.Add(btnEmployee);
             panelMenu.Controls.Add(btnCustom);
@@ -80,7 +82,6 @@
             button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.TextImageRelation = TextImageRelation.ImageBeforeText;
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // btnEmployee
             // 
@@ -96,7 +97,7 @@
             btnEmployee.Padding = new Padding(18, 0, 0, 0);
             btnEmployee.Size = new Size(255, 63);
             btnEmployee.TabIndex = 6;
-            btnEmployee.Text = "    Khác";
+            btnEmployee.Text = "    Nhân viên";
             btnEmployee.TextAlign = ContentAlignment.MiddleLeft;
             btnEmployee.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnEmployee.UseVisualStyleBackColor = true;
@@ -171,6 +172,17 @@
             panelLogo.Size = new Size(255, 153);
             panelLogo.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Dock = DockStyle.Left;
+            pictureBox1.Image = Properties.Resources._04987c26aed84a227e522be830b4c16e;
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(255, 153);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
             // panel1
             // 
             panel1.BackColor = Color.LimeGreen;
@@ -190,7 +202,6 @@
             label1.Size = new Size(171, 38);
             label1.TabIndex = 0;
             label1.Text = "Chào Mừng";
-            label1.Click += label1_Click;
             // 
             // pnlDesktop
             // 
@@ -200,16 +211,25 @@
             pnlDesktop.Size = new Size(1281, 651);
             pnlDesktop.TabIndex = 2;
             // 
-            // pictureBox1
+            // btnMenu
             // 
-            pictureBox1.Dock = DockStyle.Left;
-            pictureBox1.Image = Properties.Resources._04987c26aed84a227e522be830b4c16e;
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(255, 153);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            btnMenu.Dock = DockStyle.Top;
+            btnMenu.FlatAppearance.BorderSize = 0;
+            btnMenu.FlatStyle = FlatStyle.Flat;
+            btnMenu.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnMenu.ForeColor = Color.Gainsboro;
+            btnMenu.Image = (Image)resources.GetObject("btnMenu.Image");
+            btnMenu.ImageAlign = ContentAlignment.MiddleLeft;
+            btnMenu.Location = new Point(0, 405);
+            btnMenu.Name = "btnMenu";
+            btnMenu.Padding = new Padding(18, 0, 0, 0);
+            btnMenu.Size = new Size(255, 63);
+            btnMenu.TabIndex = 8;
+            btnMenu.Text = "    Khác";
+            btnMenu.TextAlign = ContentAlignment.MiddleLeft;
+            btnMenu.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnMenu.UseVisualStyleBackColor = true;
+            btnMenu.Click += btnMenu_Click;
             // 
             // Main
             // 
@@ -226,9 +246,9 @@
             Text = "Main";
             panelMenu.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -245,5 +265,6 @@
         private Panel pnlDesktop;
         private Label label1;
         private PictureBox pictureBox1;
+        private Button btnMenu;
     }
 }

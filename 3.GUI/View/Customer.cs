@@ -1,4 +1,5 @@
-﻿using _2.BUS.IService;
+﻿using _1.DAL.Models;
+using _2.BUS.IService;
 using _2.BUS.Service;
 using _2.BUS.ViewModels;
 using ClosedXML.Excel;
@@ -125,7 +126,7 @@ namespace _3.GUI.View
             dtgCustomer.Columns[4].HeaderText = "Địa chỉ";
             dtgCustomer.Columns[0].Visible = false;
             dtgCustomer.Rows.Clear();
-            foreach (var x in iKhachHang.GetAll().Where(c => c.Ten.ToLower().Contains(txbTimKH.Text)))
+            foreach (var x in iKhachHang.GetAll().Where(c => c.Ten.StartsWith(txbTimKH.Text) || c.MaKh.StartsWith(txbTimKH.Text)))
             {
                 dtgCustomer.Rows.Add(x.IdKhachHang, x.MaKh, x.Ten, x.sdt, x.DiaChi);
             }

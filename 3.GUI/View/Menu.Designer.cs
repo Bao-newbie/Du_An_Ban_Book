@@ -30,25 +30,27 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            rbtntacGiaNHD = new RadioButton();
+            rbtntacGiaHD = new RadioButton();
+            label24 = new Label();
             tbxEmailTG = new TextBox();
             label21 = new Label();
             btnXoa = new Button();
             label2 = new Label();
             txbTimTG = new TextBox();
             tbxSdtTG = new TextBox();
-            label5 = new Label();
             btnEdit = new Button();
             btnAdd = new Button();
             tbxDiaChiTG = new TextBox();
-            tbxTuoiTG = new TextBox();
             tbxTenTG = new TextBox();
-            tbxMaTG = new TextBox();
             tbxDiaChi = new Label();
             label3 = new Label();
             tbxSdtKH = new Label();
-            label1 = new Label();
             dtgAuthor = new DataGridView();
             tabPage2 = new TabPage();
+            rbtnNxbNgungHD = new RadioButton();
+            rBtnNxbHD = new RadioButton();
+            label22 = new Label();
             dtgNXB = new DataGridView();
             label9 = new Label();
             txbTimNXB = new TextBox();
@@ -64,6 +66,9 @@
             label7 = new Label();
             label8 = new Label();
             tabPage3 = new TabPage();
+            rbtnNccNHD = new RadioButton();
+            rbtnNccHD = new RadioButton();
+            label23 = new Label();
             label10 = new Label();
             tbxTimNCC = new TextBox();
             tbxDiaChiNCC = new TextBox();
@@ -131,23 +136,22 @@
             // tabPage1
             // 
             tabPage1.BackColor = Color.FromArgb(60, 63, 81);
+            tabPage1.Controls.Add(rbtntacGiaNHD);
+            tabPage1.Controls.Add(rbtntacGiaHD);
+            tabPage1.Controls.Add(label24);
             tabPage1.Controls.Add(tbxEmailTG);
             tabPage1.Controls.Add(label21);
             tabPage1.Controls.Add(btnXoa);
             tabPage1.Controls.Add(label2);
             tabPage1.Controls.Add(txbTimTG);
             tabPage1.Controls.Add(tbxSdtTG);
-            tabPage1.Controls.Add(label5);
             tabPage1.Controls.Add(btnEdit);
             tabPage1.Controls.Add(btnAdd);
             tabPage1.Controls.Add(tbxDiaChiTG);
-            tabPage1.Controls.Add(tbxTuoiTG);
             tabPage1.Controls.Add(tbxTenTG);
-            tabPage1.Controls.Add(tbxMaTG);
             tabPage1.Controls.Add(tbxDiaChi);
             tabPage1.Controls.Add(label3);
             tabPage1.Controls.Add(tbxSdtKH);
-            tabPage1.Controls.Add(label1);
             tabPage1.Controls.Add(dtgAuthor);
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
@@ -156,11 +160,50 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Tác giả";
             // 
+            // rbtntacGiaNHD
+            // 
+            rbtntacGiaNHD.BackColor = Color.FromArgb(60, 63, 81);
+            rbtntacGiaNHD.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            rbtntacGiaNHD.ForeColor = Color.White;
+            rbtntacGiaNHD.Location = new Point(291, 162);
+            rbtntacGiaNHD.Margin = new Padding(4);
+            rbtntacGiaNHD.Name = "rbtntacGiaNHD";
+            rbtntacGiaNHD.Size = new Size(195, 32);
+            rbtntacGiaNHD.TabIndex = 124;
+            rbtntacGiaNHD.TabStop = true;
+            rbtntacGiaNHD.Text = "Ngưng hoạt động";
+            rbtntacGiaNHD.UseVisualStyleBackColor = false;
+            // 
+            // rbtntacGiaHD
+            // 
+            rbtntacGiaHD.BackColor = Color.FromArgb(60, 63, 81);
+            rbtntacGiaHD.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            rbtntacGiaHD.ForeColor = Color.White;
+            rbtntacGiaHD.Location = new Point(146, 160);
+            rbtntacGiaHD.Margin = new Padding(4);
+            rbtntacGiaHD.Name = "rbtntacGiaHD";
+            rbtntacGiaHD.Size = new Size(137, 32);
+            rbtntacGiaHD.TabIndex = 123;
+            rbtntacGiaHD.TabStop = true;
+            rbtntacGiaHD.Text = "Hoạt động";
+            rbtntacGiaHD.UseVisualStyleBackColor = false;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label24.ForeColor = Color.White;
+            label24.Location = new Point(32, 164);
+            label24.Name = "label24";
+            label24.Size = new Size(107, 28);
+            label24.TabIndex = 122;
+            label24.Text = "Trạng thái:";
+            // 
             // tbxEmailTG
             // 
             tbxEmailTG.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxEmailTG.ForeColor = Color.Black;
-            tbxEmailTG.Location = new Point(503, 144);
+            tbxEmailTG.Location = new Point(586, 110);
             tbxEmailTG.Margin = new Padding(5);
             tbxEmailTG.Name = "tbxEmailTG";
             tbxEmailTG.Size = new Size(251, 34);
@@ -171,11 +214,11 @@
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label21.ForeColor = Color.White;
-            label21.Location = new Point(503, 107);
+            label21.Location = new Point(509, 116);
             label21.Name = "label21";
-            label21.Size = new Size(64, 28);
+            label21.Size = new Size(69, 28);
             label21.TabIndex = 48;
-            label21.Text = "Email";
+            label21.Text = "Email:";
             // 
             // btnXoa
             // 
@@ -183,7 +226,7 @@
             btnXoa.Cursor = Cursors.Hand;
             btnXoa.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnXoa.ForeColor = Color.White;
-            btnXoa.Location = new Point(836, 194);
+            btnXoa.Location = new Point(1031, 193);
             btnXoa.Margin = new Padding(4);
             btnXoa.Name = "btnXoa";
             btnXoa.Size = new Size(180, 55);
@@ -197,21 +240,21 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(29, 221);
+            label2.Location = new Point(539, 220);
             label2.Name = "label2";
-            label2.Size = new Size(100, 28);
+            label2.Size = new Size(105, 28);
             label2.TabIndex = 45;
-            label2.Text = "Tìm kiếm";
+            label2.Text = "Tìm kiếm:";
             // 
             // txbTimTG
             // 
             txbTimTG.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             txbTimTG.ForeColor = Color.Black;
-            txbTimTG.Location = new Point(137, 215);
+            txbTimTG.Location = new Point(652, 214);
             txbTimTG.Margin = new Padding(5);
             txbTimTG.Name = "txbTimTG";
             txbTimTG.PlaceholderText = "Nhập tên tác giả muốn tìm";
-            txbTimTG.Size = new Size(646, 34);
+            txbTimTG.Size = new Size(348, 34);
             txbTimTG.TabIndex = 44;
             txbTimTG.TextChanged += txbTimTG_TextChanged;
             // 
@@ -220,22 +263,11 @@
             tbxSdtTG.Cursor = Cursors.IBeam;
             tbxSdtTG.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxSdtTG.ForeColor = Color.Black;
-            tbxSdtTG.Location = new Point(186, 144);
+            tbxSdtTG.Location = new Point(148, 110);
             tbxSdtTG.Margin = new Padding(5);
             tbxSdtTG.Name = "tbxSdtTG";
             tbxSdtTG.Size = new Size(278, 34);
             tbxSdtTG.TabIndex = 42;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(69, 110);
-            label5.Name = "label5";
-            label5.Size = new Size(50, 28);
-            label5.TabIndex = 43;
-            label5.Text = "Tuổi";
             // 
             // btnEdit
             // 
@@ -243,7 +275,7 @@
             btnEdit.Cursor = Cursors.Hand;
             btnEdit.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnEdit.ForeColor = Color.White;
-            btnEdit.Location = new Point(836, 111);
+            btnEdit.Location = new Point(1031, 110);
             btnEdit.Margin = new Padding(4);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(180, 55);
@@ -258,7 +290,7 @@
             btnAdd.Cursor = Cursors.Hand;
             btnAdd.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnAdd.ForeColor = Color.White;
-            btnAdd.Location = new Point(836, 22);
+            btnAdd.Location = new Point(1031, 21);
             btnAdd.Margin = new Padding(4);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(180, 55);
@@ -271,88 +303,55 @@
             // 
             tbxDiaChiTG.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxDiaChiTG.ForeColor = Color.Black;
-            tbxDiaChiTG.Location = new Point(503, 59);
+            tbxDiaChiTG.Location = new Point(586, 25);
             tbxDiaChiTG.Margin = new Padding(5);
             tbxDiaChiTG.Name = "tbxDiaChiTG";
             tbxDiaChiTG.Size = new Size(251, 34);
             tbxDiaChiTG.TabIndex = 38;
-            // 
-            // tbxTuoiTG
-            // 
-            tbxTuoiTG.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            tbxTuoiTG.ForeColor = Color.Black;
-            tbxTuoiTG.Location = new Point(69, 144);
-            tbxTuoiTG.Margin = new Padding(5);
-            tbxTuoiTG.Name = "tbxTuoiTG";
-            tbxTuoiTG.Size = new Size(95, 34);
-            tbxTuoiTG.TabIndex = 36;
             // 
             // tbxTenTG
             // 
             tbxTenTG.Cursor = Cursors.IBeam;
             tbxTenTG.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxTenTG.ForeColor = Color.Black;
-            tbxTenTG.Location = new Point(186, 59);
+            tbxTenTG.Location = new Point(148, 25);
             tbxTenTG.Margin = new Padding(5);
             tbxTenTG.Name = "tbxTenTG";
             tbxTenTG.Size = new Size(278, 34);
             tbxTenTG.TabIndex = 32;
-            // 
-            // tbxMaTG
-            // 
-            tbxMaTG.Cursor = Cursors.IBeam;
-            tbxMaTG.Enabled = false;
-            tbxMaTG.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            tbxMaTG.ForeColor = Color.Black;
-            tbxMaTG.Location = new Point(69, 59);
-            tbxMaTG.Margin = new Padding(5);
-            tbxMaTG.Name = "tbxMaTG";
-            tbxMaTG.Size = new Size(95, 34);
-            tbxMaTG.TabIndex = 33;
             // 
             // tbxDiaChi
             // 
             tbxDiaChi.AutoSize = true;
             tbxDiaChi.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             tbxDiaChi.ForeColor = Color.White;
-            tbxDiaChi.Location = new Point(503, 22);
+            tbxDiaChi.Location = new Point(495, 31);
             tbxDiaChi.Name = "tbxDiaChi";
-            tbxDiaChi.Size = new Size(78, 28);
+            tbxDiaChi.Size = new Size(83, 28);
             tbxDiaChi.TabIndex = 40;
-            tbxDiaChi.Text = "Địa chỉ";
+            tbxDiaChi.Text = "Địa chỉ:";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(186, 25);
+            label3.Location = new Point(58, 31);
             label3.Name = "label3";
-            label3.Size = new Size(77, 28);
+            label3.Size = new Size(82, 28);
             label3.TabIndex = 39;
-            label3.Text = "Họ Tên";
+            label3.Text = "Họ Tên:";
             // 
             // tbxSdtKH
             // 
             tbxSdtKH.AutoSize = true;
             tbxSdtKH.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             tbxSdtKH.ForeColor = Color.White;
-            tbxSdtKH.Location = new Point(186, 111);
+            tbxSdtKH.Location = new Point(86, 116);
             tbxSdtKH.Name = "tbxSdtKH";
-            tbxSdtKH.Size = new Size(49, 28);
+            tbxSdtKH.Size = new Size(54, 28);
             tbxSdtKH.TabIndex = 37;
-            tbxSdtKH.Text = "SDT";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(69, 26);
-            label1.Name = "label1";
-            label1.Size = new Size(70, 28);
-            label1.TabIndex = 34;
-            label1.Text = "Mã TG";
+            tbxSdtKH.Text = "SDT:";
             // 
             // dtgAuthor
             // 
@@ -369,6 +368,9 @@
             // tabPage2
             // 
             tabPage2.BackColor = Color.FromArgb(60, 63, 81);
+            tabPage2.Controls.Add(rbtnNxbNgungHD);
+            tabPage2.Controls.Add(rBtnNxbHD);
+            tabPage2.Controls.Add(label22);
             tabPage2.Controls.Add(dtgNXB);
             tabPage2.Controls.Add(label9);
             tabPage2.Controls.Add(txbTimNXB);
@@ -390,6 +392,45 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Nhà xuất bản";
             // 
+            // rbtnNxbNgungHD
+            // 
+            rbtnNxbNgungHD.BackColor = Color.FromArgb(60, 63, 81);
+            rbtnNxbNgungHD.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            rbtnNxbNgungHD.ForeColor = Color.White;
+            rbtnNxbNgungHD.Location = new Point(282, 157);
+            rbtnNxbNgungHD.Margin = new Padding(4);
+            rbtnNxbNgungHD.Name = "rbtnNxbNgungHD";
+            rbtnNxbNgungHD.Size = new Size(195, 32);
+            rbtnNxbNgungHD.TabIndex = 121;
+            rbtnNxbNgungHD.TabStop = true;
+            rbtnNxbNgungHD.Text = "Ngưng hoạt động";
+            rbtnNxbNgungHD.UseVisualStyleBackColor = false;
+            // 
+            // rBtnNxbHD
+            // 
+            rBtnNxbHD.BackColor = Color.FromArgb(60, 63, 81);
+            rBtnNxbHD.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            rBtnNxbHD.ForeColor = Color.White;
+            rBtnNxbHD.Location = new Point(137, 157);
+            rBtnNxbHD.Margin = new Padding(4);
+            rBtnNxbHD.Name = "rBtnNxbHD";
+            rBtnNxbHD.Size = new Size(137, 32);
+            rBtnNxbHD.TabIndex = 120;
+            rBtnNxbHD.TabStop = true;
+            rBtnNxbHD.Text = "Hoạt động";
+            rBtnNxbHD.UseVisualStyleBackColor = false;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label22.ForeColor = Color.White;
+            label22.Location = new Point(27, 161);
+            label22.Name = "label22";
+            label22.Size = new Size(107, 28);
+            label22.TabIndex = 119;
+            label22.Text = "Trạng thái:";
+            // 
             // dtgNXB
             // 
             dtgNXB.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -407,21 +448,21 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label9.ForeColor = Color.White;
-            label9.Location = new Point(61, 221);
+            label9.Location = new Point(529, 210);
             label9.Name = "label9";
-            label9.Size = new Size(100, 28);
+            label9.Size = new Size(105, 28);
             label9.TabIndex = 64;
-            label9.Text = "Tìm kiếm";
+            label9.Text = "Tìm kiếm:";
             // 
             // txbTimNXB
             // 
             txbTimNXB.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             txbTimNXB.ForeColor = Color.Black;
-            txbTimNXB.Location = new Point(169, 215);
+            txbTimNXB.Location = new Point(637, 204);
             txbTimNXB.Margin = new Padding(5);
             txbTimNXB.Name = "txbTimNXB";
             txbTimNXB.PlaceholderText = "Nhập tên nhà xuất bản để tìm kiếm";
-            txbTimNXB.Size = new Size(617, 34);
+            txbTimNXB.Size = new Size(363, 34);
             txbTimNXB.TabIndex = 63;
             txbTimNXB.TextChanged += txbTimNXB_TextChanged;
             // 
@@ -431,7 +472,7 @@
             btnXoaNXB.Cursor = Cursors.Hand;
             btnXoaNXB.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnXoaNXB.ForeColor = Color.White;
-            btnXoaNXB.Location = new Point(837, 194);
+            btnXoaNXB.Location = new Point(1021, 194);
             btnXoaNXB.Margin = new Padding(4);
             btnXoaNXB.Name = "btnXoaNXB";
             btnXoaNXB.Size = new Size(180, 55);
@@ -446,7 +487,7 @@
             btnSuaNXB.Cursor = Cursors.Hand;
             btnSuaNXB.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnSuaNXB.ForeColor = Color.White;
-            btnSuaNXB.Location = new Point(837, 108);
+            btnSuaNXB.Location = new Point(1021, 108);
             btnSuaNXB.Margin = new Padding(4);
             btnSuaNXB.Name = "btnSuaNXB";
             btnSuaNXB.Size = new Size(180, 55);
@@ -461,7 +502,7 @@
             button2.Cursor = Cursors.Hand;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(837, 23);
+            button2.Location = new Point(1021, 23);
             button2.Margin = new Padding(4);
             button2.Name = "button2";
             button2.Size = new Size(180, 55);
@@ -474,7 +515,7 @@
             // 
             tbxDcNXB.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxDcNXB.ForeColor = Color.Black;
-            tbxDcNXB.Location = new Point(398, 141);
+            tbxDcNXB.Location = new Point(613, 105);
             tbxDcNXB.Margin = new Padding(5);
             tbxDcNXB.Name = "tbxDcNXB";
             tbxDcNXB.Size = new Size(336, 34);
@@ -484,7 +525,7 @@
             // 
             tbxSdtNXB.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxSdtNXB.ForeColor = Color.Black;
-            tbxSdtNXB.Location = new Point(398, 56);
+            tbxSdtNXB.Location = new Point(613, 33);
             tbxSdtNXB.Margin = new Padding(5);
             tbxSdtNXB.Name = "tbxSdtNXB";
             tbxSdtNXB.Size = new Size(336, 34);
@@ -495,7 +536,7 @@
             tbxTenNXB.Cursor = Cursors.IBeam;
             tbxTenNXB.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxTenNXB.ForeColor = Color.Black;
-            tbxTenNXB.Location = new Point(61, 141);
+            tbxTenNXB.Location = new Point(137, 105);
             tbxTenNXB.Margin = new Padding(5);
             tbxTenNXB.Name = "tbxTenNXB";
             tbxTenNXB.Size = new Size(273, 34);
@@ -507,7 +548,7 @@
             tbxMaNXB.Enabled = false;
             tbxMaNXB.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxMaNXB.ForeColor = Color.Black;
-            tbxMaNXB.Location = new Point(61, 56);
+            tbxMaNXB.Location = new Point(137, 33);
             tbxMaNXB.Margin = new Padding(5);
             tbxMaNXB.Name = "tbxMaNXB";
             tbxMaNXB.Size = new Size(273, 34);
@@ -518,48 +559,51 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(398, 108);
+            label4.Location = new Point(527, 113);
             label4.Name = "label4";
-            label4.Size = new Size(78, 28);
+            label4.Size = new Size(83, 28);
             label4.TabIndex = 59;
-            label4.Text = "Địa chỉ";
+            label4.Text = "Địa chỉ:";
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.White;
-            label6.Location = new Point(61, 108);
+            label6.Location = new Point(40, 113);
             label6.Name = "label6";
-            label6.Size = new Size(89, 28);
+            label6.Size = new Size(94, 28);
             label6.TabIndex = 58;
-            label6.Text = "Tên NXB";
+            label6.Text = "Tên NXB:";
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.White;
-            label7.Location = new Point(398, 23);
+            label7.Location = new Point(467, 41);
             label7.Name = "label7";
-            label7.Size = new Size(138, 28);
+            label7.Size = new Size(143, 28);
             label7.TabIndex = 56;
-            label7.Text = "Số điện thoại";
+            label7.Text = "Số điện thoại:";
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = Color.White;
-            label8.Location = new Point(61, 23);
+            label8.Location = new Point(44, 41);
             label8.Name = "label8";
-            label8.Size = new Size(85, 28);
+            label8.Size = new Size(90, 28);
             label8.TabIndex = 54;
-            label8.Text = "Mã NXB";
+            label8.Text = "Mã NXB:";
             // 
             // tabPage3
             // 
             tabPage3.BackColor = Color.FromArgb(60, 63, 81);
+            tabPage3.Controls.Add(rbtnNccNHD);
+            tabPage3.Controls.Add(rbtnNccHD);
+            tabPage3.Controls.Add(label23);
             tabPage3.Controls.Add(label10);
             tabPage3.Controls.Add(tbxTimNCC);
             tabPage3.Controls.Add(tbxDiaChiNCC);
@@ -581,26 +625,65 @@
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Nhà cung cấp";
             // 
+            // rbtnNccNHD
+            // 
+            rbtnNccNHD.BackColor = Color.FromArgb(60, 63, 81);
+            rbtnNccNHD.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            rbtnNccNHD.ForeColor = Color.White;
+            rbtnNccNHD.Location = new Point(359, 164);
+            rbtnNccNHD.Margin = new Padding(4);
+            rbtnNccNHD.Name = "rbtnNccNHD";
+            rbtnNccNHD.Size = new Size(195, 32);
+            rbtnNccNHD.TabIndex = 124;
+            rbtnNccNHD.TabStop = true;
+            rbtnNccNHD.Text = "Ngưng hoạt động";
+            rbtnNccNHD.UseVisualStyleBackColor = false;
+            // 
+            // rbtnNccHD
+            // 
+            rbtnNccHD.BackColor = Color.FromArgb(60, 63, 81);
+            rbtnNccHD.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            rbtnNccHD.ForeColor = Color.White;
+            rbtnNccHD.Location = new Point(214, 164);
+            rbtnNccHD.Margin = new Padding(4);
+            rbtnNccHD.Name = "rbtnNccHD";
+            rbtnNccHD.Size = new Size(137, 32);
+            rbtnNccHD.TabIndex = 123;
+            rbtnNccHD.TabStop = true;
+            rbtnNccHD.Text = "Hoạt động";
+            rbtnNccHD.UseVisualStyleBackColor = false;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label23.ForeColor = Color.White;
+            label23.Location = new Point(104, 168);
+            label23.Name = "label23";
+            label23.Size = new Size(107, 28);
+            label23.TabIndex = 122;
+            label23.Text = "Trạng thái:";
+            // 
             // label10
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label10.ForeColor = Color.White;
-            label10.Location = new Point(56, 221);
+            label10.Location = new Point(526, 212);
             label10.Name = "label10";
-            label10.Size = new Size(100, 28);
+            label10.Size = new Size(105, 28);
             label10.TabIndex = 76;
-            label10.Text = "Tìm kiếm";
+            label10.Text = "Tìm kiếm:";
             // 
             // tbxTimNCC
             // 
             tbxTimNCC.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             tbxTimNCC.ForeColor = Color.Black;
-            tbxTimNCC.Location = new Point(164, 215);
+            tbxTimNCC.Location = new Point(634, 206);
             tbxTimNCC.Margin = new Padding(5);
             tbxTimNCC.Name = "tbxTimNCC";
             tbxTimNCC.PlaceholderText = "Nhập tên nhà cung cấp để tìm kiếm";
-            tbxTimNCC.Size = new Size(617, 34);
+            tbxTimNCC.Size = new Size(388, 34);
             tbxTimNCC.TabIndex = 75;
             tbxTimNCC.TextChanged += tbxTimNCC_TextChanged;
             // 
@@ -608,7 +691,7 @@
             // 
             tbxDiaChiNCC.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxDiaChiNCC.ForeColor = Color.Black;
-            tbxDiaChiNCC.Location = new Point(395, 139);
+            tbxDiaChiNCC.Location = new Point(667, 109);
             tbxDiaChiNCC.Margin = new Padding(5);
             tbxDiaChiNCC.Name = "tbxDiaChiNCC";
             tbxDiaChiNCC.Size = new Size(336, 34);
@@ -618,7 +701,7 @@
             // 
             tbxSdtNCC.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxSdtNCC.ForeColor = Color.Black;
-            tbxSdtNCC.Location = new Point(395, 54);
+            tbxSdtNCC.Location = new Point(667, 24);
             tbxSdtNCC.Margin = new Padding(5);
             tbxSdtNCC.Name = "tbxSdtNCC";
             tbxSdtNCC.Size = new Size(336, 34);
@@ -629,7 +712,7 @@
             tbxTenNCC.Cursor = Cursors.IBeam;
             tbxTenNCC.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxTenNCC.ForeColor = Color.Black;
-            tbxTenNCC.Location = new Point(58, 139);
+            tbxTenNCC.Location = new Point(214, 109);
             tbxTenNCC.Margin = new Padding(5);
             tbxTenNCC.Name = "tbxTenNCC";
             tbxTenNCC.Size = new Size(273, 34);
@@ -641,7 +724,7 @@
             tbxMaNCC.Enabled = false;
             tbxMaNCC.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tbxMaNCC.ForeColor = Color.Black;
-            tbxMaNCC.Location = new Point(58, 54);
+            tbxMaNCC.Location = new Point(214, 21);
             tbxMaNCC.Margin = new Padding(5);
             tbxMaNCC.Name = "tbxMaNCC";
             tbxMaNCC.Size = new Size(273, 34);
@@ -652,44 +735,44 @@
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(395, 106);
+            label11.Location = new Point(581, 115);
             label11.Name = "label11";
-            label11.Size = new Size(78, 28);
+            label11.Size = new Size(83, 28);
             label11.TabIndex = 74;
-            label11.Text = "Địa chỉ";
+            label11.Text = "Địa chỉ:";
             // 
             // label12
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label12.ForeColor = Color.White;
-            label12.Location = new Point(58, 106);
+            label12.Location = new Point(34, 115);
             label12.Name = "label12";
-            label12.Size = new Size(172, 28);
+            label12.Size = new Size(177, 28);
             label12.TabIndex = 73;
-            label12.Text = "Tên nhà cung cấp";
+            label12.Text = "Tên nhà cung cấp:";
             // 
             // label13
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label13.ForeColor = Color.White;
-            label13.Location = new Point(395, 21);
+            label13.Location = new Point(521, 30);
             label13.Name = "label13";
-            label13.Size = new Size(138, 28);
+            label13.Size = new Size(143, 28);
             label13.TabIndex = 71;
-            label13.Text = "Số điện thoại";
+            label13.Text = "Số điện thoại:";
             // 
             // label14
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label14.ForeColor = Color.White;
-            label14.Location = new Point(58, 21);
+            label14.Location = new Point(38, 27);
             label14.Name = "label14";
-            label14.Size = new Size(168, 28);
+            label14.Size = new Size(173, 28);
             label14.TabIndex = 69;
-            label14.Text = "Mã nhà cung cấp";
+            label14.Text = "Mã nhà cung cấp:";
             // 
             // dtgNCC
             // 
@@ -709,7 +792,7 @@
             btnDeleteNCC.Cursor = Cursors.Hand;
             btnDeleteNCC.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnDeleteNCC.ForeColor = Color.White;
-            btnDeleteNCC.Location = new Point(867, 195);
+            btnDeleteNCC.Location = new Point(1054, 185);
             btnDeleteNCC.Margin = new Padding(4);
             btnDeleteNCC.Name = "btnDeleteNCC";
             btnDeleteNCC.Size = new Size(180, 55);
@@ -724,7 +807,7 @@
             btnEditNCC.Cursor = Cursors.Hand;
             btnEditNCC.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnEditNCC.ForeColor = Color.White;
-            btnEditNCC.Location = new Point(867, 109);
+            btnEditNCC.Location = new Point(1054, 99);
             btnEditNCC.Margin = new Padding(4);
             btnEditNCC.Name = "btnEditNCC";
             btnEditNCC.Size = new Size(180, 55);
@@ -739,7 +822,7 @@
             btnAddNCC.Cursor = Cursors.Hand;
             btnAddNCC.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnAddNCC.ForeColor = Color.White;
-            btnAddNCC.Location = new Point(867, 24);
+            btnAddNCC.Location = new Point(1054, 14);
             btnAddNCC.Margin = new Padding(4);
             btnAddNCC.Name = "btnAddNCC";
             btnAddNCC.Size = new Size(180, 55);
@@ -1075,17 +1158,13 @@
         private TabPage tabPage1;
         private DataGridView dtgAuthor;
         private TextBox tbxSdtTG;
-        private Label label5;
         private Button btnEdit;
         private Button btnAdd;
         private TextBox tbxDiaChiTG;
-        private TextBox tbxTuoiTG;
         private TextBox tbxTenTG;
-        private TextBox tbxMaTG;
         private Label tbxDiaChi;
         private Label label3;
         private Label tbxSdtKH;
-        private Label label1;
         private Label label2;
         private TextBox txbTimTG;
         private Button btnXoa;
@@ -1101,7 +1180,6 @@
         private Button btnSuaNXB;
         private Button button2;
         private DataGridView dtgNXB;
-        private Label label9;
         private TextBox txbTimNXB;
         private DataGridView dtgNCC;
         private Button btnDeleteNCC;
@@ -1139,5 +1217,15 @@
         private Button btnUpdateLB;
         private TextBox tbxMaLB;
         private Label label19;
+        private RadioButton rbtnNxbNgungHD;
+        private RadioButton rBtnNxbHD;
+        private Label label22;
+        private Label label9;
+        private RadioButton rbtnNccNHD;
+        private RadioButton rbtnNccHD;
+        private Label label23;
+        private RadioButton rbtntacGiaNHD;
+        private RadioButton rbtntacGiaHD;
+        private Label label24;
     }
 }

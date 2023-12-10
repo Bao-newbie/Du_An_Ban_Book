@@ -27,18 +27,6 @@ namespace _1.DAL.Repositories
             return true;
         }
 
-        public bool Delete(NhanVien nhanVien)
-        {
-            if (nhanVien == null)
-            {
-                return false;
-            }
-            var obj = context.nhanViens.FirstOrDefault(x => x.Id == nhanVien.Id);
-            context.nhanViens.Remove(nhanVien);
-            context.SaveChanges();
-            return true;
-        }
-
         public List<NhanVien> GetAll()
         {
             return context.nhanViens.ToList();

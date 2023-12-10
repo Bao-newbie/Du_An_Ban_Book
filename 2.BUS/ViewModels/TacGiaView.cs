@@ -11,7 +11,6 @@ namespace _2.BUS.ViewModels
         public  Guid idtacGia { get; set; }
         public string MaTG { get; set; }
         public string Ten { get; set; }
-        public int Tuoi { get; set; }
         public string diaChi { get; set; }
         public string Email { get; set; }
         public string SDT { get; set; }
