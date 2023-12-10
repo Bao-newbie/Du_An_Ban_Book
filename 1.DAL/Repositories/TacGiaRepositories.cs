@@ -56,7 +56,6 @@ namespace _1.DAL.Repositories
             obj.idTacGia = tacGia.idTacGia;
             obj.MaTG = tacGia.MaTG;
             obj.Ten = tacGia.Ten;
-            obj.Tuoi = tacGia.Tuoi;
             obj.DiaChi = tacGia.DiaChi;
             obj.SDT = tacGia.SDT;
             obj.Email = tacGia.Email;

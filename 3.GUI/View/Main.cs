@@ -103,17 +103,12 @@ namespace _3.GUI.View
 
         private void btnEmployee_Click(object sender, EventArgs e)
         {
-            OpenchildForm(new View.Menu(), sender);
+            OpenchildForm(new View.QLNhanVien(), sender);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnMenu_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender);
-        }//alo alo 123
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            OpenchildForm(new View.Menu(), sender);
         }
     }
 }

@@ -11,7 +11,6 @@ namespace _2.BUS.IService
     {
         bool Add(NhanVienView nhanVienView);
         bool Update(NhanVienView nhanVienView);
-        bool Delete(NhanVienView nhanVienView);
         List<NhanVienView> GetAll();
     }
 }

@@ -12,7 +12,7 @@ using _1.DAL.SachDbContext;
 namespace _1.DAL.Migrations
 {
     [DbContext(typeof(DbSach))]
-    [Migration("20231208085933_CC")]
+    [Migration("20231210081443_CC")]
     partial class CC
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -323,9 +323,6 @@ namespace _1.DAL.Migrations
                     b.Property<string>("Ten")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Tuoi")
-                        .HasColumnType("int");
 
                     b.Property<int>("trangThai")
                         .HasColumnType("int");

@@ -1,4 +1,5 @@
 ﻿using _1.DAL.IRepositories;
+using _1.DAL.Migrations;
 using _1.DAL.Repositories;
 using _2.BUS.IService;
 using _2.BUS.Service;
@@ -44,21 +45,20 @@ namespace _3.GUI.View
         #region
         public void LoadData()
         {
-            dtgAuthor.ColumnCount = 8;
+            dtgAuthor.ColumnCount = 7;
             dtgAuthor.Columns[0].HeaderText = "ID";
             dtgAuthor.Columns[1].HeaderText = "Mã TG";
             dtgAuthor.Columns[2].HeaderText = "Tên TG";
-            dtgAuthor.Columns[3].HeaderText = "Tuổi";
-            dtgAuthor.Columns[4].HeaderText = "SDT";
-            dtgAuthor.Columns[5].HeaderText = "Địa chỉ";
-            dtgAuthor.Columns[6].HeaderText = "Email";
+            dtgAuthor.Columns[3].HeaderText = "SDT";
+            dtgAuthor.Columns[4].HeaderText = "Địa chỉ";
+            dtgAuthor.Columns[5].HeaderText = "Email";
             dtgAuthor.Columns[7].HeaderText = "Trạng thái";
             dtgAuthor.Columns[0].Visible = false;
             dtgAuthor.Rows.Clear();
             foreach (var item in iTacGia.GetAll())
             {
-                dtgAuthor.Rows.Add(item.idtacGia, item.MaTG, item.Ten, item.Tuoi, item.SDT, item.diaChi, item.Email, item.trangThai == 1 ?"Hoạt động" : "Không hoạt động");
-            } 
+                dtgAuthor.Rows.Add(item.idtacGia, item.MaTG, item.Ten, item.SDT, item.diaChi, item.Email, item.trangThai == 0 ? "Hoạt động" : "Không hoạt động");
+            }
         }
         string MaTG()
         {
@@ -77,6 +77,7 @@ namespace _3.GUI.View
 
                     if (control is TextBox)
                         (control as TextBox).Clear();
+
                     else
                         funct(control.Controls);
 
@@ -90,17 +91,23 @@ namespace _3.GUI.View
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var tg = new TacGiaView()
-                {
-                    idtacGia = Guid.NewGuid(),
-                    MaTG = MaTG(),
-                    Ten = tbxTenTG.Text,
-                    Tuoi = Convert.ToInt32(tbxTuoiTG.Text),
-                    SDT = tbxSdtTG.Text,
-                    diaChi = tbxDiaChiTG.Text,
-                    Email = tbxEmailTG.Text,
+                var tg = new TacGiaView();
 
-                };
+                tg.idtacGia = Guid.NewGuid();
+                tg.MaTG = MaTG();
+                tg.Ten = tbxTenTG.Text;
+                tg.SDT = tbxSdtTG.Text;
+                tg.diaChi = tbxDiaChiTG.Text;
+                tg.Email = tbxEmailTG.Text;
+                if (rbtntacGiaHD.Checked)
+                {
+                    tg.trangThai = 0;
+                }
+                if (rbtntacGiaNHD.Checked)
+                {
+                    tg.trangThai = 1;
+                }
+
                 iTacGia.Add(tg);
                 MessageBox.Show("Thêm thành công");
                 LoadData();
@@ -119,18 +126,24 @@ namespace _3.GUI.View
             if (dialogResult == DialogResult.Yes)
             {
                 var x = iTacGia.GetAll().FirstOrDefault(c => c.idtacGia.Equals(id));
-                x.MaTG = tbxMaTG.Text;
                 x.Ten = tbxTenTG.Text;
-                x.Tuoi = Convert.ToInt32(tbxTuoiTG.Text);
                 x.SDT = tbxSdtTG.Text;
                 x.diaChi = tbxDiaChiTG.Text;
                 x.Email = tbxEmailTG.Text;
+                if (rbtntacGiaHD.Checked)
+                {
+                    x.trangThai = 0;
+                }
+                if (rbtntacGiaNHD.Checked)
+                {
+                    x.trangThai = 1;
+                }
                 iTacGia.Update(x);
                 MessageBox.Show("Sửa thành công");
                 LoadData();
                 ClearForm();
             }
-            if (dialogResult == DialogResult.No)
+            else
             {
                 MessageBox.Show("Sửa không thành công");
             }
@@ -167,7 +180,7 @@ namespace _3.GUI.View
             dtgAuthor.Rows.Clear();
             foreach (var item in iTacGia.GetAll().Where(c => c.Ten.ToLower().Contains(txbTimTG.Text)))
             {
-                dtgAuthor.Rows.Add(item.idtacGia, item.MaTG, item.Ten, item.Tuoi, item.SDT, item.diaChi, item.Email);
+                dtgAuthor.Rows.Add(item.idtacGia, item.MaTG, item.Ten, item.SDT, item.diaChi, item.Email);
             }
         }
 
@@ -177,9 +190,7 @@ namespace _3.GUI.View
             if (rd == -1 || rd >= iTacGia.GetAll().Count) return;
             id = Guid.Parse(Convert.ToString(dtgAuthor.Rows[rd].Cells[0].Value));
             var tg = iTacGia.GetAll().FirstOrDefault(c => c.idtacGia.Equals(id));
-            tbxMaTG.Text = tg.MaTG;
             tbxTenTG.Text = tg.Ten;
-            tbxTuoiTG.Text = Convert.ToString(tg.Tuoi);
             tbxSdtTG.Text = tg.SDT;
             tbxDiaChiTG.Text = tg.diaChi;
             tbxEmailTG.Text = tg.Email;
@@ -190,26 +201,19 @@ namespace _3.GUI.View
         #region
         public void LoadDataNXB()
         {
-            dtgNXB.ColumnCount = 5;
+            dtgNXB.ColumnCount = 6;
             dtgNXB.Columns[0].HeaderText = "ID";
             dtgNXB.Columns[1].HeaderText = "Mã NXB";
             dtgNXB.Columns[2].HeaderText = "Tên NXB";
             dtgNXB.Columns[3].HeaderText = "SDT";
             dtgNXB.Columns[4].HeaderText = "Địa chỉ";
+            dtgNXB.Columns[5].HeaderText = "Trạng thái";
             dtgNXB.Columns[0].Visible = false;
             dtgNXB.Rows.Clear();
             foreach (var item in iNXB.GetAll())
             {
-                dtgNXB.Rows.Add(item.idNXB, item.MaNXB, item.TenNXB, item.SDT, item.diaChi);
+                dtgNXB.Rows.Add(item.idNXB, item.MaNXB, item.TenNXB, item.SDT, item.diaChi, item.trangThai == 0 ? "Hoạt động" : "Ngưng hoạt động");
             }
-        }
-        string MaNXB()
-        {
-            string ma = "NXB";
-            Random rand = new Random();
-            int a = rand.Next(1000, 9999);
-            var so = a.ToString();
-            return ma + so;
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -217,15 +221,23 @@ namespace _3.GUI.View
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var tg = new NXBView()
-                {
-                    idNXB = Guid.NewGuid(),
-                    MaNXB = MaNXB(),
-                    TenNXB = tbxTenNXB.Text,
-                    SDT = tbxSdtNXB.Text,
-                    diaChi = tbxDcNXB.Text,
+                var tg = new NXBView();
 
-                };
+                tg.idNXB = Guid.NewGuid();
+                tg.MaNXB = tbxMaNXB.Text;
+                tg.TenNXB = tbxTenNXB.Text;
+                tg.SDT = tbxSdtNXB.Text;
+                tg.diaChi = tbxDcNXB.Text;
+                if (rBtnNxbHD.Checked)
+                {
+                    tg.trangThai = 0;
+                }
+                if (rbtnNxbNgungHD.Checked)
+                {
+                    tg.trangThai = 1;
+                }
+
+
                 iNXB.Add(tg);
                 MessageBox.Show("Thêm thành công");
                 LoadDataNXB();
@@ -248,6 +260,14 @@ namespace _3.GUI.View
                 x.TenNXB = tbxTenNXB.Text;
                 x.SDT = tbxSdtNXB.Text;
                 x.diaChi = tbxDcNXB.Text;
+                if (rBtnNxbHD.Checked)
+                {
+                    x.trangThai = 0;
+                }
+                if (rbtnNxbNgungHD.Checked)
+                {
+                    x.trangThai = 1;
+                }
                 iNXB.Update(x);
                 MessageBox.Show("Sửa thành công");
                 LoadDataNXB();
@@ -278,17 +298,18 @@ namespace _3.GUI.View
 
         private void txbTimNXB_TextChanged(object sender, EventArgs e)
         {
-            dtgNXB.ColumnCount = 5;
+            dtgNXB.ColumnCount = 6;
             dtgNXB.Columns[0].HeaderText = "ID";
             dtgNXB.Columns[1].HeaderText = "Mã NXB";
             dtgNXB.Columns[2].HeaderText = "Tên NXB";
             dtgNXB.Columns[3].HeaderText = "SDT";
             dtgNXB.Columns[4].HeaderText = "Địa chỉ";
+            dtgNXB.Columns[5].HeaderText = "Trạng thái";
             dtgNXB.Columns[0].Visible = false;
             dtgNXB.Rows.Clear();
             foreach (var item in iNXB.GetAll().Where(c => c.TenNXB.ToLower().Contains(txbTimNXB.Text)))
             {
-                dtgNXB.Rows.Add(item.idNXB, item.MaNXB, item.TenNXB, item.SDT, item.diaChi);
+                dtgNXB.Rows.Add(item.idNXB, item.MaNXB, item.TenNXB, item.SDT, item.diaChi, item.trangThai == 0 ? "Hoạt động" : "Ngưng hoạt động");
             }
         }
 
@@ -302,6 +323,8 @@ namespace _3.GUI.View
             tbxTenNXB.Text = tg.TenNXB;
             tbxSdtNXB.Text = tg.SDT;
             tbxDcNXB.Text = tg.diaChi;
+            rBtnNxbHD.Checked = tg.trangThai == 0;
+            rbtnNxbNgungHD.Checked = tg.trangThai == 1;
         }
         #endregion
 
@@ -314,35 +337,35 @@ namespace _3.GUI.View
             dtgNCC.Columns[2].HeaderText = "Tên nhà cung cấp";
             dtgNCC.Columns[3].HeaderText = "SDT";
             dtgNCC.Columns[4].HeaderText = "Địa chỉ";
+            dtgNCC.Columns[5].HeaderText = "Trạng thái";
             dtgNCC.Columns[0].Visible = false;
             dtgNCC.Rows.Clear();
             foreach (var item in iNhaCungCap.GetAll())
             {
-                dtgNCC.Rows.Add(item.idNhaCC, item.MaNhaCungCap, item.TenNCC, item.SDT, item.diaChi);
+                dtgNCC.Rows.Add(item.idNhaCC, item.MaNhaCungCap, item.TenNCC, item.SDT, item.diaChi, item.trangThai == 0 ? "Hoạt động" : "Ngưng hoạt động");
             }
-        }
-        string MaNCC()
-        {
-            string ma = "NCC";
-            Random rand = new Random();
-            int a = rand.Next(1000, 9999);
-            var so = a.ToString();
-            return ma + so;
         }
         private void btnAddNCC_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var ncc = new NhaCungCapView()
-                {
-                    idNhaCC = Guid.NewGuid(),
-                    MaNhaCungCap = MaNCC(),
-                    TenNCC = tbxTenNCC.Text,
-                    SDT = tbxSdtNCC.Text,
-                    diaChi = tbxDiaChiNCC.Text,
+                var ncc = new NhaCungCapView();
 
-                };
+                ncc.idNhaCC = Guid.NewGuid();
+                ncc.MaNhaCungCap = tbxMaNCC.Text;
+                ncc.TenNCC = tbxTenNCC.Text;
+                ncc.SDT = tbxSdtNCC.Text;
+                ncc.diaChi = tbxDiaChiNCC.Text;
+                if (rbtnNccHD.Checked)
+                {
+                    ncc.trangThai = 0;
+                }
+                if (rbtnNccNHD.Checked)
+                {
+                    ncc.trangThai = 1;
+                }
+
                 iNhaCungCap.Add(ncc);
                 MessageBox.Show("Thêm thành công");
                 LoadDataNCC();
@@ -365,6 +388,14 @@ namespace _3.GUI.View
                 x.TenNCC = tbxTenNCC.Text;
                 x.SDT = tbxSdtNCC.Text;
                 x.diaChi = tbxDiaChiNCC.Text;
+                if (rbtnNccHD.Checked)
+                {
+                    x.trangThai = 0;
+                }
+                if (rbtnNccNHD.Checked)
+                {
+                    x.trangThai = 1;
+                }
                 iNhaCungCap.Update(x);
                 MessageBox.Show("Sửa thành công");
                 LoadDataNCC();
@@ -401,11 +432,12 @@ namespace _3.GUI.View
             dtgNCC.Columns[2].HeaderText = "Tên nhà cung cấp";
             dtgNCC.Columns[3].HeaderText = "SDT";
             dtgNCC.Columns[4].HeaderText = "Địa chỉ";
+            dtgNCC.Columns[5].HeaderText = "Trạng thái";
             dtgNCC.Columns[0].Visible = false;
             dtgNCC.Rows.Clear();
             foreach (var item in iNhaCungCap.GetAll().Where(c => c.TenNCC.ToLower().Contains(tbxTimNCC.Text)))
             {
-                dtgNCC.Rows.Add(item.idNhaCC, item.MaNhaCungCap, item.TenNCC, item.SDT, item.diaChi);
+                dtgNCC.Rows.Add(item.idNhaCC, item.MaNhaCungCap, item.TenNCC, item.SDT, item.diaChi, item.trangThai == 0 ? "Hoạt động" : "Ngưng hoạt động");
             }
         }
         private void dtgNCC_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -418,6 +450,8 @@ namespace _3.GUI.View
             tbxTenNCC.Text = tg.TenNCC;
             tbxSdtNCC.Text = tg.SDT;
             tbxDiaChiNCC.Text = tg.diaChi;
+            rbtnNccHD.Checked = tg.trangThai == 0;
+            rbtnNccNHD.Checked = tg.trangThai == 1;
         }
 
         #endregion
@@ -631,5 +665,7 @@ namespace _3.GUI.View
             }
         }
         #endregion
+
+
     }
 }

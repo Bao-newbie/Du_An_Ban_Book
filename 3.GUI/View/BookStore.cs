@@ -1,4 +1,5 @@
-﻿using _2.BUS.IService;
+﻿using _1.DAL.Models;
+using _2.BUS.IService;
 using _2.BUS.Service;
 using _2.BUS.ViewModels;
 using Du_An_Ban_Sach._1.DAL.Models;
@@ -303,7 +304,7 @@ namespace _3.GUI.View
             dtgProduct.Columns[12].Name = "Trạng thái";
             dtgProduct.Columns[0].Visible = false;
             dtgProduct.Rows.Clear();
-            foreach (var x in iSanPham.GetAll().Where(c => c.TenSach.ToLower().Contains(txbTimSach.Text)))
+            foreach (var x in iSanPham.GetAll().Where(c => c.TenSach.StartsWith(txbTimSach.Text) || c.MaSP.StartsWith(txbTimSach.Text)))
             {
                 dtgProduct.Rows.Add(x.IDsanPham, x.MaSP, x.TenSach, x.TenTG, x.SoLuongTon, x.GiaNhap, x.GiaBan, x.TenNCC, x.TenNXB,
                     x.TenTheLoai, x.LoaiBia, x.MoTa, x.TrangThai == 0 ? "Còn hàng" : "Hết hàng");

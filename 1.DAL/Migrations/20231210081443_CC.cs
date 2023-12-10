@@ -95,7 +95,6 @@ namespace _1.DAL.Migrations
                     idTacGia = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MaTG = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Ten = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tuoi = table.Column<int>(type: "int", nullable: false),
                     DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SDT = table.Column<string>(type: "nvarchar(max)", nullable: false),

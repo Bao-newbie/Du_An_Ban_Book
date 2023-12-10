@@ -9,6 +9,7 @@ namespace _2.BUS.ViewModels
     public class NhanVienView
     {
         public Guid idNV { get; set; }
+        public string maNv { get; set; }
         public string HoTen { get; set; }
         public string Email { get; set; }
         public string SDT { get; set; }

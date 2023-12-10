@@ -322,9 +322,6 @@ namespace _1.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Tuoi")
-                        .HasColumnType("int");
-
                     b.Property<int>("trangThai")
                         .HasColumnType("int");
 

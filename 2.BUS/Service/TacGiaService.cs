@@ -26,7 +26,6 @@ namespace _2.BUS.Service
                 idTacGia = Guid.NewGuid(),
                 MaTG = obj.MaTG,
                 Ten = obj.Ten,
-                Tuoi = obj.Tuoi,
                 DiaChi = obj.diaChi,
                 Email = obj.Email,
                 SDT = obj.SDT,
@@ -53,7 +52,6 @@ namespace _2.BUS.Service
                        idtacGia = a.idTacGia,
                        MaTG = a.MaTG,
                        Ten = a.Ten,
-                       Tuoi = a.Tuoi,
                        diaChi = a.DiaChi,
                        Email = a.Email,
                        SDT = a.SDT,
@@ -68,7 +66,6 @@ namespace _2.BUS.Service
             var ncc = iRp.GetAll().FirstOrDefault(c => c.idTacGia == obj.idtacGia);
             ncc.MaTG = obj.MaTG;
             ncc.Ten = obj.Ten;
-            ncc.Tuoi = obj.Tuoi;
             ncc.DiaChi = obj.diaChi;
             ncc.Email = obj.Email;
             ncc.SDT = obj.SDT;

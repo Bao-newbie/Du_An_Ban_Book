@@ -11,7 +11,6 @@ namespace _1.DAL.IRepositories
     {
         bool Add(NhanVien nhanVien);
         bool Update(NhanVien nhanVien);
-        bool Delete(NhanVien nhanVien);
         List<NhanVien> GetAll();
     }
 }
