@@ -27,7 +27,7 @@ namespace _2.BUS.Service
             if (obj == null) return false;
             var ncc = new HoaDon()
             {
-                IDHoaDon = Guid.NewGuid(),
+                IDHoaDon = obj.iDhoaDon,
                 idKhachHang = obj.iDkhachHang,
                 MaHD = obj.MaHD,
                 NgayThanhToan = obj.ngayThanhToan,

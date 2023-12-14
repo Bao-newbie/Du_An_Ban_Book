@@ -18,6 +18,5 @@ namespace _1.DAL.Models
         public string ChucVu { get; set; }
         public int TrangThai { get; set; }
         public string Password { get; set; }
-        public ICollection<HoaDon> hoaDons { get; set; }
     }
 }

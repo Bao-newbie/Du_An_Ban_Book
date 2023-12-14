@@ -120,6 +120,7 @@
             tbxSDT.Name = "tbxSDT";
             tbxSDT.Size = new Size(336, 34);
             tbxSDT.TabIndex = 1;
+            tbxSDT.KeyPress += tbxSDT_KeyPress;
             // 
             // tbxDC
             // 
@@ -222,6 +223,7 @@
             Controls.Add(label1);
             Name = "Customer";
             Text = "Customer";
+            Click += Customer_Click;
             ((System.ComponentModel.ISupportInitialize)dtgCustomer).EndInit();
             ResumeLayout(false);
             PerformLayout();

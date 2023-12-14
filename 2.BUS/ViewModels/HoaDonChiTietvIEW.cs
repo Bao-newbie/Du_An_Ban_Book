@@ -16,9 +16,7 @@ namespace _2.BUS.ViewModels
         public int soLuong { get; set; }
         public double tongTien { get; set; }
         public string tenSach { get; set; }
-        public string maSach { get; set; }
         public double giaBan { get; set; }
-        public int soLuongTon { get; set; }
         public SanPham sanPham { get; set; }
         public HoaDon hoaDon { get; set; }
     }

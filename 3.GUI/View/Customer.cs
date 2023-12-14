@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Xamarin.Forms;
@@ -23,6 +24,7 @@ namespace _3.GUI.View
         IKhachHangService iKhachHang;
         List<KhachHangView> lstKH;
         Guid id;
+        string SDT;
 
         public Customer()
         {
@@ -66,30 +68,64 @@ namespace _3.GUI.View
             var so = a.ToString();
             return ma + so;
         }
-
+        public bool checkChu(string text)
+        {
+            return Regex.IsMatch(text, "[a-zA-Z]+");
+        }
+        public bool checkSo(string text)
+        {
+            return Regex.IsMatch(text, "[\\d]+");
+        }
+        public bool checkPhoneNumber(string text)
+        {
+            return Regex.IsMatch(text, "^[0-9]{2}[0-9]{8}$");
+        }
+        public bool IsPhoneNumberExists(string phoneNumber)
+        {
+            return iKhachHang.GetAll().Any(kh => kh.sdt == phoneNumber);
+        }
         private void btnAdd_Click(object sender, EventArgs e)
         {
+
             DialogResult dialogResul = MessageBox.Show("Bạn có muốn thêm?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResul == DialogResult.Yes)
             {
-                var kh = new KhachHangView()
+                if (tbxTenKH.Text == "" || tbxSDT.Text == "" || tbxDC.Text == "")
                 {
-                    IdKhachHang = Guid.NewGuid(),
-                    MaKh = Ma(),
-                    Ten = tbxTenKH.Text,
-                    sdt = tbxSDT.Text,
-                    DiaChi = tbxDC.Text,
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
+                }
+                else if (checkSo(tbxTenKH.Text) || checkChu(tbxSDT.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
+                }
+                else if (!checkPhoneNumber(tbxSDT.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng số điện thoại", "Thông báo");
+                }
+                else if (IsPhoneNumberExists(tbxSDT.Text))
+                {
+                    MessageBox.Show("Số điện thoại đã tồn tại", "Thông báo");
+                }
+                else
+                {
+                    var kh = new KhachHangView()
+                    {
+                        IdKhachHang = Guid.NewGuid(),
+                        MaKh = Ma(),
+                        Ten = tbxTenKH.Text,
+                        sdt = tbxSDT.Text,
+                        DiaChi = tbxDC.Text,
 
-                };
-                iKhachHang.Add(kh);
-                MessageBox.Show("Thêm thành công");
-                LoadData();
-                Clear();
-
-            }
-            if (dialogResul == DialogResult.No)
-            {
-                MessageBox.Show("Thêm không thành công");
+                    };
+                    iKhachHang.Add(kh);
+                    MessageBox.Show("Thêm thành công");
+                    LoadData();
+                    Clear();
+                }
+                if (dialogResul == DialogResult.No)
+                {
+                    MessageBox.Show("Thêm không thành công");
+                }
             }
         }
 
@@ -98,15 +134,30 @@ namespace _3.GUI.View
             DialogResult dialogResul = MessageBox.Show("Bạn có muốn sửa?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResul == DialogResult.Yes)
             {
-                var x = iKhachHang.GetAll().FirstOrDefault(p => p.IdKhachHang.Equals(id));
-                x.MaKh = tbxMaKH.Text;
-                x.Ten = tbxTenKH.Text;
-                x.sdt = tbxSDT.Text;
-                x.DiaChi = tbxDC.Text;
-                iKhachHang.Update(x);
-                MessageBox.Show("Sửa thành công");
-                LoadData();
-                Clear();
+                if (tbxTenKH.Text == "" || tbxSDT.Text == "" || tbxDC.Text == "")
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
+                }
+                else if (checkSo(tbxTenKH.Text) || checkChu(tbxSDT.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
+                }
+                else if (!checkPhoneNumber(tbxSDT.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng số điện thoại", "Thông báo");
+                }
+                else
+                {
+                    var x = iKhachHang.GetAll().FirstOrDefault(p => p.IdKhachHang.Equals(id));
+                    x.MaKh = tbxMaKH.Text;
+                    x.Ten = tbxTenKH.Text;
+                    x.sdt = tbxSDT.Text;
+                    x.DiaChi = tbxDC.Text;
+                    iKhachHang.Update(x);
+                    MessageBox.Show("Sửa thành công");
+                    LoadData();
+                    Clear();
+                }
             }
             if (dialogResul == DialogResult.No)
             {
@@ -220,6 +271,24 @@ namespace _3.GUI.View
                 ExportToExcelFromDataGridView(dtgCustomer, filePath);
                 MessageBox.Show("Dữ liệu đã được xuất ra Excel.");
             }
+        }
+
+        private void tbxSDT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Kiểm tra xem ký tự nhấn có phải là số không
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                // Nếu không phải là số, không cho phép nhập
+                e.Handled = true;
+            }
+        }
+
+        private void Customer_Click(object sender, EventArgs e)
+        {
+            tbxMaKH.Text = "";
+            tbxTenKH.Text = "";
+            tbxSDT.Text = "";
+            tbxDC.Text = "";
         }
         //Baongoobomera
     }

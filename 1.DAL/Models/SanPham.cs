@@ -28,7 +28,5 @@ namespace Du_An_Ban_Sach._1.DAL.Models
         public virtual HinhThucBia HinhThucBia { get; set; }
         public virtual TheLoai TheLoai { get; set; }
         public virtual TacGia TacGia { get; set; }
-
-
     }
 }

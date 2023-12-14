@@ -1,5 +1,5 @@
 ﻿using _1.DAL.IRepositories;
-using _1.DAL.Migrations;
+using _1.DAL.Models;
 using _1.DAL.Repositories;
 using _2.BUS.IService;
 using _2.BUS.Service;
@@ -12,6 +12,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -42,7 +43,60 @@ namespace _3.GUI.View
             ClearForm();
 
         }
-        #region
+        #region Check
+        public bool checkChu(string text)
+        {
+            return Regex.IsMatch(text, "[a-zA-Z]+");
+        }
+        public bool checkSo(string text)
+        {
+            return Regex.IsMatch(text, "[\\d]+");
+        }
+        public bool checkPhoneNumber(string text)
+        {
+            return Regex.IsMatch(text, "^[0-9]{2}[0-9]{8}$");
+        }
+        public bool IsPhoneNumberExistsTG(string phoneNumber)
+        {
+            return iTacGia.GetAll().Any(kh => kh.SDT == phoneNumber);
+        }
+        public bool IsPhoneNumberExistsNXB(string phoneNumber)
+        {
+            return iNXB.GetAll().Any(kh => kh.SDT == phoneNumber);
+        }
+        public bool IsPhoneNumberExistsNCC(string phoneNumber)
+        {
+            return iNhaCungCap.GetAll().Any(kh => kh.SDT == phoneNumber);
+        }
+        public bool IsValueNameTL(string name)
+        {
+            return iTheLoai.GetAll().Any(kh => kh.TenTheLoai == name);
+        }
+        public bool IsValueNameLB (string name)
+        {
+            return iHinhThucBia.GetAll().Any(kh => kh.LoaiBia == name);
+        }
+        public bool IsValidEmail(string username, int minLength, int maxLength)
+        {
+            int length = username.Length;
+
+            if (length > minLength && length < maxLength)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool IsValidGmailEmail1(string email)
+        {
+            // Biểu thức chính quy kiểm tra địa chỉ email với tên miền là "gmail.com"
+            string pattern = @"^[a-zA-Z0-9_.+-]+@gmail\.com$";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(email);
+        }
+        #endregion
+        #region Tac Gia
         public void LoadData()
         {
             dtgAuthor.ColumnCount = 7;
@@ -52,7 +106,7 @@ namespace _3.GUI.View
             dtgAuthor.Columns[3].HeaderText = "SDT";
             dtgAuthor.Columns[4].HeaderText = "Địa chỉ";
             dtgAuthor.Columns[5].HeaderText = "Email";
-            dtgAuthor.Columns[7].HeaderText = "Trạng thái";
+            dtgAuthor.Columns[6].HeaderText = "Trạng thái";
             dtgAuthor.Columns[0].Visible = false;
             dtgAuthor.Rows.Clear();
             foreach (var item in iTacGia.GetAll())
@@ -86,32 +140,61 @@ namespace _3.GUI.View
 
         }
 
+       
         private void btnAdd_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var tg = new TacGiaView();
-
-                tg.idtacGia = Guid.NewGuid();
-                tg.MaTG = MaTG();
-                tg.Ten = tbxTenTG.Text;
-                tg.SDT = tbxSdtTG.Text;
-                tg.diaChi = tbxDiaChiTG.Text;
-                tg.Email = tbxEmailTG.Text;
-                if (rbtntacGiaHD.Checked)
+                if (tbxTenTG.Text == "" || tbxSdtTG.Text == "" || tbxEmailTG.Text == "" || tbxDiaChiTG.Text == "" || rbtntacGiaHD.Checked == false || rbtntacGiaNHD.Checked == false)
                 {
-                    tg.trangThai = 0;
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
                 }
-                if (rbtntacGiaNHD.Checked)
+                else if (checkSo(tbxTenTG.Text) || checkChu(tbxSdtTG.Text))
                 {
-                    tg.trangThai = 1;
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
                 }
+                else if (!checkPhoneNumber(tbxSdtTG.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng số điện thoại", "Thông báo");
+                }
+                else if (IsPhoneNumberExistsTG(tbxSdtTG.Text))
+                {
+                    MessageBox.Show("Số điện thoại đã tồn tại", "Thông báo");
+                }
+                else if (!IsValidGmailEmail1(tbxEmailTG.Text))
+                {
+                    MessageBox.Show("Email sai định dạng ", "Thông báo");
 
-                iTacGia.Add(tg);
-                MessageBox.Show("Thêm thành công");
-                LoadData();
-                ClearForm();
+                }
+                else if (!IsValidEmail(tbxEmailTG.Text, 4, 16))
+                {
+                    MessageBox.Show("Email chỉ được từ 5-15 ký tự", "Thông báo");
+                }
+                else
+                {
+                    var tg = new TacGiaView();
+
+                    tg.idtacGia = Guid.NewGuid();
+                    tg.MaTG = MaTG();
+                    tg.Ten = tbxTenTG.Text;
+                    tg.SDT = tbxSdtTG.Text;
+                    tg.diaChi = tbxDiaChiTG.Text;
+                    tg.Email = tbxEmailTG.Text;
+                    if (rbtntacGiaHD.Checked)
+                    {
+                        tg.trangThai = 0;
+                    }
+                    if (rbtntacGiaNHD.Checked)
+                    {
+                        tg.trangThai = 1;
+                    }
+
+                    iTacGia.Add(tg);
+                    MessageBox.Show("Thêm thành công");
+                    LoadData();
+                    ClearForm();
+                }
 
             }
             if (dialogResult == DialogResult.No)
@@ -125,23 +208,47 @@ namespace _3.GUI.View
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var x = iTacGia.GetAll().FirstOrDefault(c => c.idtacGia.Equals(id));
-                x.Ten = tbxTenTG.Text;
-                x.SDT = tbxSdtTG.Text;
-                x.diaChi = tbxDiaChiTG.Text;
-                x.Email = tbxEmailTG.Text;
-                if (rbtntacGiaHD.Checked)
+                if (tbxTenTG.Text == "" || tbxSdtTG.Text == "" || tbxEmailTG.Text == "" || tbxDiaChiTG.Text == "" || rbtntacGiaHD.Checked == false || rbtntacGiaNHD.Checked == false)
                 {
-                    x.trangThai = 0;
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
                 }
-                if (rbtntacGiaNHD.Checked)
+                else if (checkSo(tbxTenTG.Text) || checkChu(tbxSdtTG.Text))
                 {
-                    x.trangThai = 1;
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
                 }
-                iTacGia.Update(x);
-                MessageBox.Show("Sửa thành công");
-                LoadData();
-                ClearForm();
+                else if (!checkPhoneNumber(tbxSdtTG.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng số điện thoại", "Thông báo");
+                }
+                else if (!IsValidGmailEmail1(tbxEmailTG.Text))
+                {
+                    MessageBox.Show("Email sai định dạng ", "Thông báo");
+
+                }
+                else if (!IsValidEmail(tbxEmailTG.Text, 4, 16))
+                {
+                    MessageBox.Show("Email chỉ được từ 5-15 ký tự", "Thông báo");
+                }
+                else
+                {
+                    var x = iTacGia.GetAll().FirstOrDefault(c => c.idtacGia.Equals(id));
+                    x.Ten = tbxTenTG.Text;
+                    x.SDT = tbxSdtTG.Text;
+                    x.diaChi = tbxDiaChiTG.Text;
+                    x.Email = tbxEmailTG.Text;
+                    if (rbtntacGiaHD.Checked)
+                    {
+                        x.trangThai = 0;
+                    }
+                    if (rbtntacGiaNHD.Checked)
+                    {
+                        x.trangThai = 1;
+                    }
+                    iTacGia.Update(x);
+                    MessageBox.Show("Sửa thành công");
+                    LoadData();
+                    ClearForm();
+                }
             }
             else
             {
@@ -198,7 +305,7 @@ namespace _3.GUI.View
         }
         #endregion
 
-        #region
+        #region Nha Xuat Ban
         public void LoadDataNXB()
         {
             dtgNXB.ColumnCount = 6;
@@ -215,33 +322,60 @@ namespace _3.GUI.View
                 dtgNXB.Rows.Add(item.idNXB, item.MaNXB, item.TenNXB, item.SDT, item.diaChi, item.trangThai == 0 ? "Hoạt động" : "Ngưng hoạt động");
             }
         }
+        string MaNXB()
+        {
+            string ma = "NXB";
+            Random rand = new Random();
+            int a = rand.Next(1000, 9999);
+            var so = a.ToString();
+            return ma + so;
+        }
         private void button2_Click(object sender, EventArgs e)
         {
 
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var tg = new NXBView();
-
-                tg.idNXB = Guid.NewGuid();
-                tg.MaNXB = tbxMaNXB.Text;
-                tg.TenNXB = tbxTenNXB.Text;
-                tg.SDT = tbxSdtNXB.Text;
-                tg.diaChi = tbxDcNXB.Text;
-                if (rBtnNxbHD.Checked)
+                if (tbxTenNXB.Text == "" || tbxSdtNXB.Text == "" || tbxDcNXB.Text == "" || rBtnNxbHD.Checked == false || rbtnNxbNgungHD.Checked == false)
                 {
-                    tg.trangThai = 0;
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
                 }
-                if (rbtnNxbNgungHD.Checked)
+                else if (checkSo(tbxTenNXB.Text) || checkChu(tbxSdtNXB.Text))
                 {
-                    tg.trangThai = 1;
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
                 }
+                else if (!checkPhoneNumber(tbxSdtNXB.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng số điện thoại", "Thông báo");
+                }
+                else if (IsPhoneNumberExistsNXB(tbxSdtNXB.Text))
+                {
+                    MessageBox.Show("Số điện thoại đã tồn tại", "Thông báo");
+                }
+                else
+                {
+                    var tg = new NXBView();
+
+                    tg.idNXB = Guid.NewGuid();
+                    tg.MaNXB = MaNXB();
+                    tg.TenNXB = tbxTenNXB.Text;
+                    tg.SDT = tbxSdtNXB.Text;
+                    tg.diaChi = tbxDcNXB.Text;
+                    if (rBtnNxbHD.Checked)
+                    {
+                        tg.trangThai = 0;
+                    }
+                    if (rbtnNxbNgungHD.Checked)
+                    {
+                        tg.trangThai = 1;
+                    }
 
 
-                iNXB.Add(tg);
-                MessageBox.Show("Thêm thành công");
-                LoadDataNXB();
-                ClearForm();
+                    iNXB.Add(tg);
+                    MessageBox.Show("Thêm thành công");
+                    LoadDataNXB();
+                    ClearForm();
+                }
 
             }
             if (dialogResult == DialogResult.No)
@@ -255,23 +389,38 @@ namespace _3.GUI.View
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var x = iNXB.GetAll().FirstOrDefault(c => c.idNXB.Equals(id));
-                x.MaNXB = tbxMaNXB.Text;
-                x.TenNXB = tbxTenNXB.Text;
-                x.SDT = tbxSdtNXB.Text;
-                x.diaChi = tbxDcNXB.Text;
-                if (rBtnNxbHD.Checked)
+                if (tbxTenNXB.Text == "" || tbxSdtNXB.Text == "" || tbxDcNXB.Text == "" || rBtnNxbHD.Checked == false || rbtnNxbNgungHD.Checked == false)
                 {
-                    x.trangThai = 0;
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
                 }
-                if (rbtnNxbNgungHD.Checked)
+                else if (checkSo(tbxTenNXB.Text) || checkChu(tbxSdtNXB.Text))
                 {
-                    x.trangThai = 1;
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
                 }
-                iNXB.Update(x);
-                MessageBox.Show("Sửa thành công");
-                LoadDataNXB();
-                ClearForm();
+                else if (!checkPhoneNumber(tbxSdtNXB.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng số điện thoại", "Thông báo");
+                }
+                else
+                {
+                    var x = iNXB.GetAll().FirstOrDefault(c => c.idNXB.Equals(id));
+                    x.MaNXB = tbxMaNXB.Text;
+                    x.TenNXB = tbxTenNXB.Text;
+                    x.SDT = tbxSdtNXB.Text;
+                    x.diaChi = tbxDcNXB.Text;
+                    if (rBtnNxbHD.Checked)
+                    {
+                        x.trangThai = 0;
+                    }
+                    if (rbtnNxbNgungHD.Checked)
+                    {
+                        x.trangThai = 1;
+                    }
+                    iNXB.Update(x);
+                    MessageBox.Show("Sửa thành công");
+                    LoadDataNXB();
+                    ClearForm();
+                }
             }
             if (dialogResult == DialogResult.No)
             {
@@ -328,10 +477,10 @@ namespace _3.GUI.View
         }
         #endregion
 
-        #region
+        #region Nha Cung Cap
         public void LoadDataNCC()
         {
-            dtgNCC.ColumnCount = 5;
+            dtgNCC.ColumnCount = 6;
             dtgNCC.Columns[0].HeaderText = "ID";
             dtgNCC.Columns[1].HeaderText = "Mã nhà cung cấp";
             dtgNCC.Columns[2].HeaderText = "Tên nhà cung cấp";
@@ -345,31 +494,58 @@ namespace _3.GUI.View
                 dtgNCC.Rows.Add(item.idNhaCC, item.MaNhaCungCap, item.TenNCC, item.SDT, item.diaChi, item.trangThai == 0 ? "Hoạt động" : "Ngưng hoạt động");
             }
         }
+        string MaNCC()
+        {
+            string ma = "NCC";
+            Random rand = new Random();
+            int a = rand.Next(1000, 9999);
+            var so = a.ToString();
+            return ma + so;
+        }
         private void btnAddNCC_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var ncc = new NhaCungCapView();
-
-                ncc.idNhaCC = Guid.NewGuid();
-                ncc.MaNhaCungCap = tbxMaNCC.Text;
-                ncc.TenNCC = tbxTenNCC.Text;
-                ncc.SDT = tbxSdtNCC.Text;
-                ncc.diaChi = tbxDiaChiNCC.Text;
-                if (rbtnNccHD.Checked)
+                if (tbxTenNCC.Text == "" || tbxSdtNCC.Text == "" || tbxDiaChiNCC.Text == "" || rbtnNccHD.Checked == false || rbtnNccNHD.Checked == false)
                 {
-                    ncc.trangThai = 0;
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
                 }
-                if (rbtnNccNHD.Checked)
+                else if (checkSo(tbxTenNCC.Text) || checkChu(tbxSdtNCC.Text))
                 {
-                    ncc.trangThai = 1;
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
                 }
+                else if (!checkPhoneNumber(tbxSdtNCC.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng số điện thoại", "Thông báo");
+                }
+                else if (IsPhoneNumberExistsNCC(tbxSdtNCC.Text))
+                {
+                    MessageBox.Show("Số điện thoại đã tồn tại", "Thông báo");
+                }
+                else
+                {
+                    var ncc = new NhaCungCapView();
 
-                iNhaCungCap.Add(ncc);
-                MessageBox.Show("Thêm thành công");
-                LoadDataNCC();
-                ClearForm();
+                    ncc.idNhaCC = Guid.NewGuid();
+                    ncc.MaNhaCungCap = MaNCC();
+                    ncc.TenNCC = tbxTenNCC.Text;
+                    ncc.SDT = tbxSdtNCC.Text;
+                    ncc.diaChi = tbxDiaChiNCC.Text;
+                    if (rbtnNccHD.Checked)
+                    {
+                        ncc.trangThai = 0;
+                    }
+                    if (rbtnNccNHD.Checked)
+                    {
+                        ncc.trangThai = 1;
+                    }
+
+                    iNhaCungCap.Add(ncc);
+                    MessageBox.Show("Thêm thành công");
+                    LoadDataNCC();
+                    ClearForm();
+                }
 
             }
             if (dialogResult == DialogResult.No)
@@ -383,23 +559,38 @@ namespace _3.GUI.View
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var x = iNhaCungCap.GetAll().FirstOrDefault(c => c.idNhaCC.Equals(id));
-                x.MaNhaCungCap = tbxMaNCC.Text;
-                x.TenNCC = tbxTenNCC.Text;
-                x.SDT = tbxSdtNCC.Text;
-                x.diaChi = tbxDiaChiNCC.Text;
-                if (rbtnNccHD.Checked)
+                if (tbxTenNCC.Text == "" || tbxSdtNCC.Text == "" || tbxDiaChiNCC.Text == "" || rbtnNccHD.Checked == false || rbtnNccNHD.Checked == false)
                 {
-                    x.trangThai = 0;
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
                 }
-                if (rbtnNccNHD.Checked)
+                else if (checkSo(tbxTenNCC.Text) || checkChu(tbxSdtNCC.Text))
                 {
-                    x.trangThai = 1;
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
                 }
-                iNhaCungCap.Update(x);
-                MessageBox.Show("Sửa thành công");
-                LoadDataNCC();
-                ClearForm();
+                else if (!checkPhoneNumber(tbxSdtNCC.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng số điện thoại", "Thông báo");
+                }
+                else
+                {
+                    var x = iNhaCungCap.GetAll().FirstOrDefault(c => c.idNhaCC.Equals(id));
+                    x.MaNhaCungCap = tbxMaNCC.Text;
+                    x.TenNCC = tbxTenNCC.Text;
+                    x.SDT = tbxSdtNCC.Text;
+                    x.diaChi = tbxDiaChiNCC.Text;
+                    if (rbtnNccHD.Checked)
+                    {
+                        x.trangThai = 0;
+                    }
+                    if (rbtnNccNHD.Checked)
+                    {
+                        x.trangThai = 1;
+                    }
+                    iNhaCungCap.Update(x);
+                    MessageBox.Show("Sửa thành công");
+                    LoadDataNCC();
+                    ClearForm();
+                }
             }
             if (dialogResult == DialogResult.No)
             {
@@ -456,7 +647,7 @@ namespace _3.GUI.View
 
         #endregion
 
-        #region
+        #region The Loai
         public void LoadDataTL()
         {
             dtgTL.ColumnCount = 3;
@@ -483,6 +674,18 @@ namespace _3.GUI.View
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
+                if (tbxTenTL.Text == "")
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
+                }
+                else if (checkSo(tbxTenTL.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
+                }
+                else if (IsValueNameTL(tbxTenTL.Text))
+                {
+                    MessageBox.Show("Thể loại đã tồn tại", "Thông báo");
+                }
                 var tg = new TheLoaiView()
                 {
                     idTheLoai = Guid.NewGuid(),
@@ -507,13 +710,24 @@ namespace _3.GUI.View
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var x = iTheLoai.GetAll().FirstOrDefault(c => c.idTheLoai.Equals(id));
-                x.MaTheLoai = tbxMaTL.Text;
-                x.TenTheLoai = tbxTenTL.Text;
-                iTheLoai.Update(x);
-                MessageBox.Show("Sửa thành công");
-                LoadDataTL();
-                ClearForm();
+                if (tbxTenTL.Text == "")
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
+                }
+                else if (checkSo(tbxTenTL.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
+                }
+                else
+                {
+                    var x = iTheLoai.GetAll().FirstOrDefault(c => c.idTheLoai.Equals(id));
+                    x.MaTheLoai = tbxMaTL.Text;
+                    x.TenTheLoai = tbxTenTL.Text;
+                    iTheLoai.Update(x);
+                    MessageBox.Show("Sửa thành công");
+                    LoadDataTL();
+                    ClearForm();
+                }
             }
             if (dialogResult == DialogResult.No)
             {
@@ -561,7 +775,7 @@ namespace _3.GUI.View
         }
         #endregion
 
-        #region
+        #region Loai Bia
         public void LoadDataLB()
         {
             dtgLB.ColumnCount = 3;
@@ -577,7 +791,7 @@ namespace _3.GUI.View
         }
         string MaBia()
         {
-            string ma = "B";
+            string ma = "LB";
             Random rand = new Random();
             int a = rand.Next(1000, 9999);
             var so = a.ToString();
@@ -588,17 +802,32 @@ namespace _3.GUI.View
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var tg = new HinhThucBiaView()
+                if (tbxTenBia.Text == "")
                 {
-                    idBia = Guid.NewGuid(),
-                    MaBia = MaBia(),
-                    LoaiBia = tbxTenBia.Text,
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
+                }
+                else if (checkSo(tbxTenBia.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
+                }
+                else if (IsValueNameLB(tbxTenBia.Text))
+                {
+                    MessageBox.Show("Đã có loại bìa này", "Thông báo");
+                }
+                else
+                {
+                    var tg = new HinhThucBiaView()
+                    {
+                        idBia = Guid.NewGuid(),
+                        MaBia = MaBia(),
+                        LoaiBia = tbxTenBia.Text,
 
-                };
-                iHinhThucBia.Add(tg);
-                MessageBox.Show("Thêm thành công");
-                LoadDataLB();
-                ClearForm();
+                    };
+                    iHinhThucBia.Add(tg);
+                    MessageBox.Show("Thêm thành công");
+                    LoadDataLB();
+                    ClearForm();
+                }
 
             }
             if (dialogResult == DialogResult.No)
@@ -612,13 +841,24 @@ namespace _3.GUI.View
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var x = iHinhThucBia.GetAll().FirstOrDefault(c => c.idBia.Equals(id));
-                x.MaBia = tbxMaLB.Text;
-                x.LoaiBia = tbxTenBia.Text;
-                iHinhThucBia.Update(x);
-                MessageBox.Show("Sửa thành công");
-                LoadDataLB();
-                ClearForm();
+                if (tbxTenBia.Text == "")
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
+                }
+                else if (checkSo(tbxTenBia.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
+                }
+                else
+                {
+                    var x = iHinhThucBia.GetAll().FirstOrDefault(c => c.idBia.Equals(id));
+                    x.MaBia = tbxMaLB.Text;
+                    x.LoaiBia = tbxTenBia.Text;
+                    iHinhThucBia.Update(x);
+                    MessageBox.Show("Sửa thành công");
+                    LoadDataLB();
+                    ClearForm();
+                }
             }
             if (dialogResult == DialogResult.No)
             {

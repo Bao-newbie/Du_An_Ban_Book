@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace _1.DAL.Migrations
 {
-    public partial class CC : Migration
+    public partial class lon : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -124,7 +124,6 @@ namespace _1.DAL.Migrations
                 {
                     IDHoaDon = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     idKhachHang = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    idNhanVien = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MaHD = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NgayThanhToan = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TrangThai = table.Column<int>(type: "int", nullable: false)
@@ -137,12 +136,6 @@ namespace _1.DAL.Migrations
                         column: x => x.idKhachHang,
                         principalTable: "khachHangs",
                         principalColumn: "IDKhachHang",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_hoaDons_nhanViens_idNhanVien",
-                        column: x => x.idNhanVien,
-                        principalTable: "nhanViens",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -244,11 +237,6 @@ namespace _1.DAL.Migrations
                 column: "idKhachHang");
 
             migrationBuilder.CreateIndex(
-                name: "IX_hoaDons_idNhanVien",
-                table: "hoaDons",
-                column: "idNhanVien");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_sanPhams_idHinhThucBia",
                 table: "sanPhams",
                 column: "idHinhThucBia");
@@ -280,6 +268,9 @@ namespace _1.DAL.Migrations
                 name: "hoaDonChiTiets");
 
             migrationBuilder.DropTable(
+                name: "nhanViens");
+
+            migrationBuilder.DropTable(
                 name: "hoaDons");
 
             migrationBuilder.DropTable(
@@ -287,9 +278,6 @@ namespace _1.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "khachHangs");
-
-            migrationBuilder.DropTable(
-                name: "nhanViens");
 
             migrationBuilder.DropTable(
                 name: "hinhThucBias");

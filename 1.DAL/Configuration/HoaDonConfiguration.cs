@@ -17,7 +17,6 @@ namespace _1.DAL.Configuration
             builder.Property(c => c.MaHD);
             
             builder.HasOne(c => c.KhachHang).WithMany(c => c.HoaDons).HasForeignKey(c => c.idKhachHang);
-            builder.HasOne(c => c.NhanVien).WithMany(c => c.hoaDons).HasForeignKey(c => c.idNhanVien);
         }
     }
 }

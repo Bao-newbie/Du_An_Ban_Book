@@ -1,5 +1,7 @@
 ﻿using _2.BUS.IService;
 using _2.BUS.Service;
+using _2.BUS.ViewModels;
+using Du_An_Ban_Sach._1.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +26,7 @@ namespace _3.GUI.View
             hoaDonChiTietService = new HoaDonChiTietService();
             hoaDonService = new HoaDonService();
             InitializeComponent();
+            //LoadDataBill();
         }
 
         public void LoadDataBill()
@@ -41,6 +44,14 @@ namespace _3.GUI.View
             {
                 dtgBill.Rows.Add(x.iDhoaDon, x.khachHang.MaKH, x.khachHang.Ten, x.HoaDonChiTiet.TongTien, x.trangThai, x.ngayThanhToan);
             }
+        }
+        string Ma()
+        {
+            string ma = "HD";
+            Random rand = new Random();
+            int a = rand.Next(1000, 9999);
+            var so = a.ToString();
+            return ma + so;
         }
         private void btnBill_Click(object sender, EventArgs e)
         {

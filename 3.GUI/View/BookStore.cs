@@ -11,6 +11,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -138,15 +139,55 @@ namespace _3.GUI.View
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        public bool checkChu(string text)
         {
-            var checkMa = iSanPham.GetAll().Where(c => c.MaSP == Ma()).Count();
-            if (checkMa > 1)
+            return Regex.IsMatch(text, "[a-zA-Z]+");
+        }
+        public bool checkSo(string text)
+        {
+            return Regex.IsMatch(text, "[\\d]+");
+        }
+        public bool IsValidName(string username, int minLength, int maxLength)
+        {
+            int length = username.Length;
+
+            if (length > minLength && length < maxLength)
             {
-                MessageBox.Show("Mã sản phẩm đã tồn tại");
-                return;
+                return true;
             }
 
+            return false;
+        }
+        public bool IsValidSoLuong(int soluong, int minLength, int maxLength)
+        {
+            if (soluong > minLength && soluong < maxLength)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public bool IsNameExists(string name)
+        {
+            return iSanPham.GetAll().Any(kh => kh.TenSach == name);
+        }
+        HashSet<string> danhSachTenAnh = new HashSet<string>();
+
+        // Hàm kiểm tra trùng tên ảnh
+        public bool KiemTraTrungAnh(string tenAnh)
+        {
+            if (danhSachTenAnh.Contains(tenAnh))
+            {
+                // Trùng tên ảnh
+                return true;
+            }
+
+            // Không trùng tên ảnh, thêm tên ảnh vào danh sách
+            danhSachTenAnh.Add(tenAnh);
+            return false;
+        }
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
             string Ma()
             {
                 string ma = "MS";
@@ -158,32 +199,65 @@ namespace _3.GUI.View
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn thêm không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                SanPhamView sp = new SanPhamView();
-                sp.MaSP = Ma();
-                sp.TenSach = tbxTenSach.Text;
-                sp.SoLuongTon = Convert.ToInt32(tbxSoLuong.Text);
-                sp.GiaNhap = Convert.ToDouble(tbxGiaNhap.Text);
-                sp.GiaBan = Convert.ToDouble(tbxGiaBan.Text);
-                sp.MoTa = tbxMoTa.Text;
-                if (rBtnConHang.Checked)
+                if (tbxTenSach.Text == "" || tbxSoLuong.Text == "" || tbxGiaNhap.Text == "" || tbxGiaBan.Text == "" || cbbTacGia.Text == "" || cbbNXB.Text == "" || cbbNCC.Text == "" ||
+                    cbbTL.Text == "" || cbbBia.Text == "" || pcb_IMG.Image == null || rBtnConHang.Checked == false || rBtnHetHang.Text == null)
                 {
-                    sp.TrangThai = 0;
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
                 }
-                if (rBtnHetHang.Checked)
+                else if (checkChu(tbxSoLuong.Text) || checkChu(tbxGiaNhap.Text) || checkChu(tbxGiaBan.Text))
                 {
-                    sp.TrangThai = 1;
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
                 }
-                sp.Anh = imgLocation;
-                sp.idTacGia = iTacGia.GetAll().Where(c => c.Ten == cbbTacGia.Text).Select(c => c.idtacGia).FirstOrDefault();
-                sp.idHinhThucBia = iHinhThucBia.GetAll().Where(c => c.LoaiBia == cbbBia.Text).Select(c => c.idBia).FirstOrDefault();
-                sp.idNhaCungCap = iNhaCungCap.GetAll().Where(c => c.TenNCC == cbbNCC.Text).Select(c => c.idNhaCC).FirstOrDefault();
-                sp.idNXB = iNXB.GetAll().Where(c => c.TenNXB == cbbNXB.Text).Select(c => c.idNXB).FirstOrDefault();
-                sp.idTheLoai = iITheLoai.GetAll().Where(c => c.TenTheLoai == cbbTL.Text).Select(c => c.idTheLoai).FirstOrDefault();
+                else if (Convert.ToInt32(tbxGiaBan.Text) < Convert.ToInt32(tbxGiaNhap.Text))
+                {
+                    MessageBox.Show("Giá nhập không thể cao hơn giá bán", "Cảnh báo!");
+                }
+                else if (!IsValidName(tbxTenSach.Text, 4, 51))
+                {
+                    MessageBox.Show("Tên sách chỉ nên đặt từ 5-50 ký tự", "Thông báo");
+                }
+                else if (!IsValidSoLuong(Convert.ToInt32(tbxSoLuong.Text),19,101))
+                {
+                    MessageBox.Show("Số lượng sách thêm vào chỉ tối đa 100 cuốn và nhiều hơn 20 cuốn", "Thông báo");
+                }
+                else if (IsNameExists(tbxTenSach.Text))
+                {
+                    MessageBox.Show("Tên sách đã tồn tại","Thông báo");
+                }
+                else if (!KiemTraTrungAnh(pcb_IMG.ToString()))
+                {
+                    MessageBox.Show("Ảnh đã có trong cuốn sách khác","Thông báo");
+                }
+                else
+                {
+                    SanPhamView sp = new SanPhamView();
+                    sp.MaSP = Ma();
+                    sp.TenSach = tbxTenSach.Text;
+                    sp.SoLuongTon = Convert.ToInt32(tbxSoLuong.Text);
+                    sp.GiaNhap = Convert.ToDouble(tbxGiaNhap.Text);
+                    sp.GiaBan = Convert.ToDouble(tbxGiaBan.Text);
+                    sp.MoTa = tbxMoTa.Text;
+                   
+                    if (rBtnConHang.Checked)
+                    {
+                        sp.TrangThai = 0;
+                    }
+                    if (rBtnHetHang.Checked)
+                    {
+                        sp.TrangThai = 1;
+                    }
+                    sp.Anh = imgLocation;
+                    sp.idTacGia = iTacGia.GetAll().Where(c => c.Ten == cbbTacGia.Text).Select(c => c.idtacGia).FirstOrDefault();
+                    sp.idHinhThucBia = iHinhThucBia.GetAll().Where(c => c.LoaiBia == cbbBia.Text).Select(c => c.idBia).FirstOrDefault();
+                    sp.idNhaCungCap = iNhaCungCap.GetAll().Where(c => c.TenNCC == cbbNCC.Text).Select(c => c.idNhaCC).FirstOrDefault();
+                    sp.idNXB = iNXB.GetAll().Where(c => c.TenNXB == cbbNXB.Text).Select(c => c.idNXB).FirstOrDefault();
+                    sp.idTheLoai = iITheLoai.GetAll().Where(c => c.TenTheLoai == cbbTL.Text).Select(c => c.idTheLoai).FirstOrDefault();
 
-                iSanPham.Add(sp);
-                MessageBox.Show("Thêm thành công");
-                LoadDataProduct();
-                ClearForm();
+                    iSanPham.Add(sp);
+                    MessageBox.Show("Thêm thành công");
+                    LoadDataProduct();
+                    ClearForm();
+                }
 
 
             }
@@ -236,36 +310,61 @@ namespace _3.GUI.View
             DialogResult dialogResult = MessageBox.Show("Bạn có muốn sửa không?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var sp = iSanPham.GetAll().FirstOrDefault(p => p.IDsanPham.Equals(id));
-                sp.TenSach = tbxTenSach.Text;
-                sp.SoLuongTon = Convert.ToInt32(tbxSoLuong.Text);
-                sp.GiaNhap = Convert.ToDouble(tbxGiaNhap.Text);
-                sp.GiaBan = Convert.ToDouble(tbxGiaBan.Text);
-                sp.MoTa = tbxMoTa.Text;
-                if (rBtnConHang.Checked)
+                if (tbxTenSach.Text == "" || tbxSoLuong.Text == "" || tbxGiaNhap.Text == "" || tbxGiaBan.Text == "" || cbbTacGia.Text == "" || cbbNXB.Text == "" || cbbNCC.Text == "" ||
+                   cbbTL.Text == "" || cbbBia.Text == "" || pcb_IMG.Image == null || rBtnConHang.Checked == false || rBtnHetHang.Text == null)
                 {
-                    sp.TrangThai = 0;
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
                 }
-                if (rBtnHetHang.Checked)
+                else if (checkChu(tbxSoLuong.Text) || checkChu(tbxGiaNhap.Text) || checkChu(tbxGiaBan.Text))
                 {
-                    sp.TrangThai = 1;
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
                 }
-                sp.idTacGia = iTacGia.GetAll().Where(c => c.Ten == cbbTacGia.Text).Select(c => c.idtacGia).FirstOrDefault();
-                sp.idHinhThucBia = iHinhThucBia.GetAll().Where(c => c.LoaiBia == cbbBia.Text).Select(c => c.idBia).FirstOrDefault();
-                sp.idNhaCungCap = iNhaCungCap.GetAll().Where(c => c.TenNCC == cbbNCC.Text).Select(c => c.idNhaCC).FirstOrDefault();
-                sp.idNXB = iNXB.GetAll().Where(c => c.TenNXB == cbbNXB.Text).Select(c => c.idNXB).FirstOrDefault();
-                sp.idTheLoai = iITheLoai.GetAll().Where(c => c.TenTheLoai == cbbTL.Text).Select(c => c.idTheLoai).FirstOrDefault();
+                else if (Convert.ToInt32(tbxGiaBan.Text) < Convert.ToInt32(tbxGiaNhap.Text))
+                {
+                    MessageBox.Show("Giá nhập không thể cao hơn giá bán", "Cảnh báo!");
+                }
+                else if (!IsValidName(tbxTenSach.Text, 4, 51))
+                {
+                    MessageBox.Show("Tên sách chỉ nên đặt từ 5-50 ký tự", "Thông báo");
+                }
+                else if (!IsValidSoLuong(Convert.ToInt32(tbxSoLuong.Text), 19, 101))
+                {
+                    MessageBox.Show("Số lượng sách thêm vào chỉ tối đa 100 cuốn và nhiều hơn 10 cuốn", "Thông báo");
+                }
+                else
+                {
+                    var sp = iSanPham.GetAll().FirstOrDefault(p => p.IDsanPham.Equals(id));
+                    sp.TenSach = tbxTenSach.Text;
+                    sp.SoLuongTon = Convert.ToInt32(tbxSoLuong.Text);
+                    sp.GiaNhap = Convert.ToDouble(tbxGiaNhap.Text);
+                    sp.GiaBan = Convert.ToDouble(tbxGiaBan.Text);
+                    sp.MoTa = tbxMoTa.Text;
+                   
+                    if (rBtnConHang.Checked)
+                    {
+                        sp.TrangThai = 0;
+                    }
+                    if (rBtnHetHang.Checked)
+                    {
+                        sp.TrangThai = 1;
+                    }
+                    sp.idTacGia = iTacGia.GetAll().Where(c => c.Ten == cbbTacGia.Text).Select(c => c.idtacGia).FirstOrDefault();
+                    sp.idHinhThucBia = iHinhThucBia.GetAll().Where(c => c.LoaiBia == cbbBia.Text).Select(c => c.idBia).FirstOrDefault();
+                    sp.idNhaCungCap = iNhaCungCap.GetAll().Where(c => c.TenNCC == cbbNCC.Text).Select(c => c.idNhaCC).FirstOrDefault();
+                    sp.idNXB = iNXB.GetAll().Where(c => c.TenNXB == cbbNXB.Text).Select(c => c.idNXB).FirstOrDefault();
+                    sp.idTheLoai = iITheLoai.GetAll().Where(c => c.TenTheLoai == cbbTL.Text).Select(c => c.idTheLoai).FirstOrDefault();
 
-                // Kiểm tra xem người dùng đã chọn một hình ảnh mới chưa
-                if (!string.IsNullOrEmpty(imgLocation))
-                {
-                    sp.Anh = imgLocation; // Cập nhật đường dẫn hình ảnh
-                }
+                    // Kiểm tra xem người dùng đã chọn một hình ảnh mới chưa
+                    if (!string.IsNullOrEmpty(imgLocation))
+                    {
+                        sp.Anh = imgLocation; // Cập nhật đường dẫn hình ảnh
+                    }
 
-                iSanPham.Update(sp);
-                MessageBox.Show("Sửa thành công");
-                LoadDataProduct();
-                ClearForm();
+                    iSanPham.Update(sp);
+                    MessageBox.Show("Sửa thành công");
+                    LoadDataProduct();
+                    ClearForm();
+                }
             }
         }
 
@@ -327,6 +426,11 @@ namespace _3.GUI.View
             {
                 ClearForm();
             }
+        }
+
+        private void BookStore_Click(object sender, EventArgs e)
+        {
+            ClearForm();
         }
     }
 }

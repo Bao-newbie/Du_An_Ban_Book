@@ -10,8 +10,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace _3.GUI.View
 {
@@ -56,6 +58,41 @@ namespace _3.GUI.View
             int a = rand.Next(1000, 9999);
             var so = a.ToString();
             return ma + so;
+        }
+
+        public bool checkChu(string text)
+        {
+            return Regex.IsMatch(text, "[a-zA-Z]+");
+        }
+        public bool checkSo(string text)
+        {
+            return Regex.IsMatch(text, "[\\d]+");
+        }
+        public bool checkPhoneNumber(string text)
+        {
+            return Regex.IsMatch(text, "^[0-9]{2}[0-9]{8}$");
+        }
+        public bool IsPhoneNumberExists(string phoneNumber)
+        {
+            return iNhanVien.GetAll().Any(kh => kh.SDT == phoneNumber);
+        }
+        public bool IsValidEmail(string username, int minLength, int maxLength)
+        {
+            int length = username.Length;
+
+            if (length > minLength && length < maxLength)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public bool IsValidGmailEmail1(string email)
+        {
+            // Biểu thức chính quy kiểm tra địa chỉ email với tên miền là "gmail.com"
+            string pattern = @"^[a-zA-Z0-9_.+-]+@gmail\.com$";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(email);
         }
         string Password()
         {
@@ -103,30 +140,59 @@ namespace _3.GUI.View
 
         private void btnThemNv_Click_1(object sender, EventArgs e)
         {
-            DialogResult dialogResul = MessageBox.Show("Bạn có muốn thêm?", "Thông Báo", MessageBoxButtons.YesNo);
+            DialogResult dialogResul = MessageBox.Show("Bạn có muốn sửa?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResul == DialogResult.Yes)
             {
-                var nv = new NhanVienView();
+                if (txtTenNV.Text == "" || txtSdtNv.Text == "" || cbbChucVu.Text == "" || txtEmailNV.Text == "" || txtDiaChiNv.Text == "" || rBtnHoatDong.Checked == false || rbtnNgungHD.Checked == false)
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
+                }
+                else if (checkSo(txtTenNV.Text) || checkChu(txtSdtNv.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
+                }
+                else if (!checkPhoneNumber(txtSdtNv.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng số điện thoại", "Thông báo");
+                }
+                else if (IsPhoneNumberExists(txtSdtNv.Text))
+                {
+                    MessageBox.Show("Số điện thoại đã tồn tại", "Thông báo");
+                }
+                else if (!IsValidGmailEmail1(txtEmailNV.Text))
+                {
+                    MessageBox.Show("Email sai định dạng ", "Thông báo");
 
-                nv.idNV = Guid.NewGuid();
-                nv.maNv = Ma();
-                nv.HoTen = txtTenNV.Text;
-                nv.SDT = txtSdtNv.Text;
-                nv.Email = txtEmailNV.Text;
-                nv.DiaChi = txtDiaChiNv.Text;
-                nv.ChucVu = cbbChucVu.Text;
-                if (rBtnHoatDong.Checked)
-                {
-                    nv.TrangThai = 0;
                 }
-                if (rbtnNgungHD.Checked)
+                else if (!IsValidEmail(txtEmailNV.Text, 4, 16))
                 {
-                    nv.TrangThai = 1;
+                    MessageBox.Show("Email chỉ được từ 5-15 ký tự", "Thông báo");
                 }
-                nv.Password = Password();
-                iNhanVien.Add(nv);
-                MessageBox.Show("Thêm thành công");
-                LoadData();
+                else
+                {
+                    var nv = new NhanVienView();
+
+                    nv.idNV = Guid.NewGuid();
+                    nv.maNv = Ma();
+                    nv.HoTen = txtTenNV.Text;
+                    nv.SDT = txtSdtNv.Text;
+                    nv.Email = txtEmailNV.Text;
+                    nv.DiaChi = txtDiaChiNv.Text;
+                    nv.ChucVu = cbbChucVu.Text;
+                    if (rBtnHoatDong.Checked)
+                    {
+                        nv.TrangThai = 0;
+                    }
+                    if (rbtnNgungHD.Checked)
+                    {
+                        nv.TrangThai = 1;
+                    }
+                    nv.Password = Password();
+                    iNhanVien.Add(nv);
+                    MessageBox.Show("Thêm thành công");
+                    LoadData();
+                    Clear();
+                }
             }
             if (dialogResul == DialogResult.No)
             {
@@ -140,30 +206,71 @@ namespace _3.GUI.View
             DialogResult dialogResul = MessageBox.Show("Bạn có muốn thêm?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResul == DialogResult.Yes)
             {
-                var nv = iNhanVien.GetAll().FirstOrDefault(x => x.idNV.Equals(id));
-                nv.maNv = Ma();
-                nv.HoTen = txtTenNV.Text;
-                nv.SDT = txtSdtNv.Text;
-                nv.Email = txtEmailNV.Text;
-                nv.DiaChi = txtDiaChiNv.Text;
-                nv.ChucVu = cbbChucVu.Text;
-                if (rBtnHoatDong.Checked)
+                if (txtTenNV.Text == "" || txtSdtNv.Text == "" || cbbChucVu.Text == "" || txtEmailNV.Text == "" || txtDiaChiNv.Text == "" || rBtnHoatDong.Checked == false || rbtnNgungHD.Checked == false)
                 {
-                    nv.TrangThai = 0;
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
                 }
-                if (rbtnNgungHD.Checked)
+                else if (checkSo(txtTenNV.Text) || checkChu(txtSdtNv.Text))
                 {
-                    nv.TrangThai = 1;
+                    MessageBox.Show("Vui lòng nhập đúng định dạng", "Thông báo");
                 }
-                iNhanVien.Update(nv);
-                MessageBox.Show("Sửa thành công");
-                LoadData();
+                else if (!checkPhoneNumber(txtSdtNv.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng số điện thoại", "Thông báo");
+                }
+                else if (!IsValidGmailEmail1(txtEmailNV.Text))
+                {
+                    MessageBox.Show("Email sai định dạng ", "Thông báo");
+
+                }
+                else if (IsValidEmail(txtEmailNV.Text, 4, 16))
+                {
+                    MessageBox.Show("Email chỉ được từ 5-15 ký tự", "Thông báo");
+                }
+                else
+                {
+                    var nv = iNhanVien.GetAll().FirstOrDefault(x => x.idNV.Equals(id));
+                    nv.maNv = Ma();
+                    nv.HoTen = txtTenNV.Text;
+                    nv.SDT = txtSdtNv.Text;
+                    nv.Email = txtEmailNV.Text;
+                    nv.DiaChi = txtDiaChiNv.Text;
+                    nv.ChucVu = cbbChucVu.Text;
+                    if (rBtnHoatDong.Checked)
+                    {
+                        nv.TrangThai = 0;
+                    }
+                    if (rbtnNgungHD.Checked)
+                    {
+                        nv.TrangThai = 1;
+                    }
+                    iNhanVien.Update(nv);
+                    MessageBox.Show("Sửa thành công");
+                    LoadData();
+                    Clear();
+                }
             }
             else
             {
                 MessageBox.Show("Sửa không thành công");
                 LoadData();
             }
+        }
+
+        public void Clear()
+        {
+            txtTenNV.Text = "";
+            txtSdtNv.Text = "";
+            txtDiaChiNv.Text = "";
+            txtEmailNV.Text = "";
+            cbbChucVu.Text = "";
+            rbtnNgungHD.Checked = false;
+            rBtnHoatDong.Checked = false;
+        }
+
+        private void QLNhanVien_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
     }
 }

@@ -7,16 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using _1.DAL.Models;
+using _2.BUS.IService;
 using _3.GUI;
 
 namespace _3.GUI.View
 {
     public partial class Main : Form
     {
+        public bool isExit = true;
+        public event EventHandler Logout;
         Button currenButon;
         Random random;
         int tempIndex;
         Form activeForm;
+        INhanVienServices iNhanVien;
+        List<NhanVien> lstNhanVien;
         public Main()
         {
             random = new Random();
@@ -109,6 +115,26 @@ namespace _3.GUI.View
         private void btnMenu_Click(object sender, EventArgs e)
         {
             OpenchildForm(new View.Menu(), sender);
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isExit)
+            {
+                if (MessageBox.Show("Bạn có muốn tắt hệ thống?", "Cảnh bảo", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    e.Cancel = true;
+            }
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (isExit)
+                Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Logout(this, new EventArgs());
         }
     }
 }

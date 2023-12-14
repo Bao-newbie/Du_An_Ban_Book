@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             panelMenu = new Panel();
+            btnMenu = new Button();
             button1 = new Button();
             btnEmployee = new Button();
             btnCustom = new Button();
@@ -40,7 +41,6 @@
             panel1 = new Panel();
             label1 = new Label();
             pnlDesktop = new Panel();
-            btnMenu = new Button();
             panelMenu.SuspendLayout();
             panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -65,6 +65,26 @@
             panelMenu.Size = new Size(255, 747);
             panelMenu.TabIndex = 0;
             // 
+            // btnMenu
+            // 
+            btnMenu.Dock = DockStyle.Top;
+            btnMenu.FlatAppearance.BorderSize = 0;
+            btnMenu.FlatStyle = FlatStyle.Flat;
+            btnMenu.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnMenu.ForeColor = Color.Gainsboro;
+            btnMenu.Image = (Image)resources.GetObject("btnMenu.Image");
+            btnMenu.ImageAlign = ContentAlignment.MiddleLeft;
+            btnMenu.Location = new Point(0, 405);
+            btnMenu.Name = "btnMenu";
+            btnMenu.Padding = new Padding(18, 0, 0, 0);
+            btnMenu.Size = new Size(255, 63);
+            btnMenu.TabIndex = 8;
+            btnMenu.Text = "    Khác";
+            btnMenu.TextAlign = ContentAlignment.MiddleLeft;
+            btnMenu.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnMenu.UseVisualStyleBackColor = true;
+            btnMenu.Click += btnMenu_Click;
+            // 
             // button1
             // 
             button1.FlatAppearance.BorderSize = 0;
@@ -82,6 +102,7 @@
             button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.TextImageRelation = TextImageRelation.ImageBeforeText;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // btnEmployee
             // 
@@ -190,7 +211,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(255, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1281, 96);
+            panel1.Size = new Size(1281, 83);
             panel1.TabIndex = 1;
             // 
             // label1
@@ -199,41 +220,21 @@
             label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(577, 30);
             label1.Name = "label1";
-            label1.Size = new Size(171, 38);
+            label1.Size = new Size(134, 30);
             label1.TabIndex = 0;
             label1.Text = "Chào Mừng";
             // 
             // pnlDesktop
             // 
             pnlDesktop.Dock = DockStyle.Fill;
-            pnlDesktop.Location = new Point(255, 96);
+            pnlDesktop.Location = new Point(255, 83);
             pnlDesktop.Name = "pnlDesktop";
-            pnlDesktop.Size = new Size(1281, 651);
+            pnlDesktop.Size = new Size(1281, 664);
             pnlDesktop.TabIndex = 2;
-            // 
-            // btnMenu
-            // 
-            btnMenu.Dock = DockStyle.Top;
-            btnMenu.FlatAppearance.BorderSize = 0;
-            btnMenu.FlatStyle = FlatStyle.Flat;
-            btnMenu.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnMenu.ForeColor = Color.Gainsboro;
-            btnMenu.Image = (Image)resources.GetObject("btnMenu.Image");
-            btnMenu.ImageAlign = ContentAlignment.MiddleLeft;
-            btnMenu.Location = new Point(0, 405);
-            btnMenu.Name = "btnMenu";
-            btnMenu.Padding = new Padding(18, 0, 0, 0);
-            btnMenu.Size = new Size(255, 63);
-            btnMenu.TabIndex = 8;
-            btnMenu.Text = "    Khác";
-            btnMenu.TextAlign = ContentAlignment.MiddleLeft;
-            btnMenu.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnMenu.UseVisualStyleBackColor = true;
-            btnMenu.Click += btnMenu_Click;
             // 
             // Main
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1536, 747);
@@ -244,6 +245,8 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Main";
             Text = "Main";
+            FormClosing += Main_FormClosing;
+            FormClosed += Main_FormClosed;
             panelMenu.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

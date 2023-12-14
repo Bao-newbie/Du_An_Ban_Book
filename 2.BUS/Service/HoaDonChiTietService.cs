@@ -64,7 +64,6 @@ namespace _2.BUS.Service
 
                        tenSach = c.TenSach,
                        giaBan = c.GiaBan,
-                       soLuongTon = c.SoLuongTon,
 
                    }
                    ).ToList ();
